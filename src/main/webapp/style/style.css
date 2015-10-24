@@ -1,0 +1,30 @@
+@import url(http://yui.yahooapis.com/pure/0.6.0/pure-min.css);
+@import url(http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css);
+
+body {
+    background-image: url(../images/MangaStoreJapan.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+    font-family: Helvetica;
+}
+
+.navigation {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+
+
+.splash {
+    position: absolute;
+    width: 300px;
+    margin: 0px 0 0 -150px;
+    top: 50%;
+    left: 50%;
+}
+
+.pure-button {
+    color: black;
+    background: darkorange;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>#{msg['common.title']}</title>
+    <link rel="stylesheet" href="style/style.css"/>
+</h:head>
+<h:body>
+
+    <div class="pure-menu pure-menu-horizontal navigation">
+        <a class="pure-menu-heading">#{msg['navigation.title']}</a>
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="index.xhtml">#{msg['navigation.home']}</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="favourites.xhtml">#{msg['navigation.favourites']}</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!--
+    <h:messages />
+    -->
+
+    <ui:insert name="content">
+        [Content]
+    </ui:insert>
+
+</h:body>
+</html>
