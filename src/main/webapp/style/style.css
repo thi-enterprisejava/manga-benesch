@@ -14,7 +14,16 @@ body {
     background-color: rgba(0, 0, 0, 0.9);
 }
 
-
+.content {
+    position: absolute;
+    width: 80%;
+    top: 70px;
+    bottom: 0px;
+    left:10%;
+    padding: 30px 10px 10px 30px;
+    background-color: #FFFFFF;
+    outline: 2px solid black;
+}
 
 .splash {
     position: absolute;
@@ -28,3 +37,4 @@ body {
     color: black;
     background: darkorange;
 }
+

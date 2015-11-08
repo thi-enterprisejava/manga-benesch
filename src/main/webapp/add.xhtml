@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<body>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <div class="content">
+            <h1>#{msg['add.header']}</h1>
+
+            <h:form styleClass="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <h:outputLabel for="title" value="#{msg['add.title']}" />
+                        <h:inputText id="title" value="#{selectedManga.manga.title}"
+                                     validatorMessage="#{msg['add.title.validationMessage']}">
+                            <f:validateRequired />
+                            <f:validateLength minimum="3" maximum="50" />
+                        </h:inputText>
+                        <h:message for="title" />
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="author" value="#{msg['add.author']}" />
+                        <h:inputText id="author" value="#{selectedManga.manga.author}"
+                                     validatorMessage="#{msg['add.author.validationMessage']}">
+                            <f:validateLength minimum="3" maximum="50" />
+                        </h:inputText>
+                        <h:message for="author" />
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="newGenre" value="#{msg['add.genre']}" />
+                        <h:selectOneMenu id="newGenre" value="#{selectedManga.newGenre}">
+                            <f:selectItems value="#{genreWrapper.genres}" var="genre"
+                                    itemValue="#{genre}" itemLabel="#{msg['genre.'.concat(genre)]}"/>
+                        </h:selectOneMenu>
+                        <h:commandButton action="#{selectedManga.doAddGenre}" value="#{msg['add.addGenre']}"
+                                styleClass="pure-button">
+                            <f:ajax execute="newGenre" render="selectedGenres" />
+                        </h:commandButton>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="selectedGenres" value=" " />
+                        <h:outputText id="selectedGenres" value="#{selectedManga.selectedGenres}" />
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="year" value="#{msg['add.year']}" />
+                        <h:inputText id="year" value="#{selectedManga.manga.year}"
+                                     validatorMessage="#{msg['add.year.validationMessage']}">
+                            <f:validateLongRange minimum="1000" maximum="2200" />
+                        </h:inputText>
+                        <h:message for="year" />
+                    </div>
+
+                    <div class="pure-controls">
+                        <h:commandButton action="#{selectedManga.doSave}" value="#{msg['add.save']}" styleClass="pure-button" />
+                    </div>
+
+                </fieldset>
+            </h:form>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</body>
+</html>

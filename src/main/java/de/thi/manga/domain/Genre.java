@@ -1,8 +1,10 @@
-package de.thi.manga.web.domain;
+package de.thi.manga.domain;
 
-/**
- * Created by daniel on 24.10.15.
- */
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
+import java.io.Serializable;
+
 public enum Genre {
     Adventure, Action,
     Cyberpunk,
@@ -14,4 +16,5 @@ public enum Genre {
     // Target Groups:
     Shounen, Seinen,
     Shoujo, Josei,
+
 }

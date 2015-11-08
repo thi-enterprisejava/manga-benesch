@@ -7,6 +7,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 <h:head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>#{msg['common.title']}</title>
     <link rel="stylesheet" href="style/style.css"/>
 </h:head>
@@ -18,18 +19,22 @@
             <li class="pure-menu-item">
                 <a class="pure-menu-link" href="index.xhtml">#{msg['navigation.home']}</a>
             </li>
+            <!--
             <li class="pure-menu-item">
                 <a class="pure-menu-link" href="favourites.xhtml">#{msg['navigation.favourites']}</a>
             </li>
+            -->
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="add.xhtml">#{msg['navigation.addmanga']}</a>
+            </li>
+            <!--
             <li class="pure-menu-item">
                 <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
             </li>
+            -->
+
         </ul>
     </div>
-
-    <!--
-    <h:messages />
-    -->
 
     <ui:insert name="content">
         [Content]
