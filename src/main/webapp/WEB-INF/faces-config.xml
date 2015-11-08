@@ -12,7 +12,7 @@
         </locale-config>
 
         <resource-bundle>
-            <base-name>messages</base-name>
+            <base-name>de.thi.manga.util.Messages</base-name>
             <var>msg</var>
         </resource-bundle>
     </application>
