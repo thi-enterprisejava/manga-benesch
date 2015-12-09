@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<head>
+    <title>Ergebnisse</title>
+</head>
+<body>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <div class="content">
+
+            <h1>Ergebnisse</h1>
+
+            <ul>
+                <ui:repeat value="#{searchManga.results}" var="manga">
+                    <li>
+                        <a href="details.xhtml?manga=#{manga.id}">#{manga.title} [#{manga.author} / #{manga.year}]</a>
+                    </li>
+                </ui:repeat>
+            </ul>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</body>
+</html>
