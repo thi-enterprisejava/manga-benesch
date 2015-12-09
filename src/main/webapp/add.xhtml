@@ -36,29 +36,21 @@
                     </div>
 
                     <div class="pure-control-group">
-                        <h:outputLabel for="newGenre" value="#{msg['add.genre']}" />
-                        <h:selectOneMenu id="newGenre" value="#{selectedManga.newGenre}">
-                            <f:selectItems value="#{genreWrapper.genres}" var="genre"
-                                    itemValue="#{genre}" itemLabel="#{msg['genre.'.concat(genre)]}"/>
-                        </h:selectOneMenu>
-                        <h:commandButton action="#{selectedManga.doAddGenre}" value="#{msg['add.addGenre']}"
-                                styleClass="pure-button">
-                            <f:ajax execute="newGenre" render="selectedGenres" />
-                        </h:commandButton>
-                    </div>
-
-                    <div class="pure-control-group">
-                        <h:outputLabel for="selectedGenres" value=" " />
-                        <h:outputText id="selectedGenres" value="#{selectedManga.selectedGenres}" />
-                    </div>
-
-                    <div class="pure-control-group">
                         <h:outputLabel for="year" value="#{msg['add.year']}" />
                         <h:inputText id="year" value="#{selectedManga.manga.year}"
                                      validatorMessage="#{msg['add.year.validationMessage']}">
                             <f:validateLongRange minimum="1000" maximum="2200" />
                         </h:inputText>
                         <h:message for="year" />
+                    </div>
+
+                    <div class="pure-control-group tablelist">
+                        <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
+                        <h:selectManyCheckbox id="genres" value="#{selectedManga.selectedGenreIds}">
+                            <f:selectItems value="#{selectedManga.listGenres}" var="genre"
+                                           itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
+                        </h:selectManyCheckbox>
+                        <h:message for="genres"/>
                     </div>
 
                     <div class="pure-controls">
