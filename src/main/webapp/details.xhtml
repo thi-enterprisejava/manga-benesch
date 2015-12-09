@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>#{selectedManga.manga.title}</title>
+    <f:metadata>
+        <f:viewParam name="manga" value="#{selectedManga.mangaId}"/>
+        <f:viewAction action="#{selectedManga.init}"/>
+    </f:metadata>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+
+            <div class="content">
+
+                <h1>#{selectedManga.manga.title}</h1>
+
+                <p>
+                    <h:outputLabel for="author" value="#{msg['add.author']}"/>
+                    <span id="author">#{selectedManga.manga.author}</span>
+                </p>
+
+                <p>
+                    <h:outputLabel for="year" value="#{msg['add.year']}"/>
+                    <span id="year">#{selectedManga.manga.year}</span>
+                </p>
+
+                <ul>
+                    <ui:repeat value="#{selectedManga.manga.genres}" var="genre">
+                        <li>
+                            #{genre.name}
+                        </li>
+                    </ui:repeat>
+                </ul>
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+</html>

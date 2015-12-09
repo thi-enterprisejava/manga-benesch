@@ -1,19 +1,32 @@
 package de.thi.manga.domain;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Manga implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String title;
     private String author;
 
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Genre> genres = new ArrayList<>();
 
     private int year;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

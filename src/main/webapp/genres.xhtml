@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>#{msg['genres.Genre']}</title>
+    <f:metadata>
+        <f:viewParam name="cocktail" value="#{selectedManga.cocktailId}"/>
+        <f:viewAction action="#{selectedManga.init}"/>
+    </f:metadata>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+
+            <div class="content">
+
+                <h1>#{msg['genres.Genre']}</h1>
+
+                <ul>
+                    <ui:repeat value="#{selectedGenre.listGenres}" var="genre">
+                        <li>
+                            #{genre}
+                        </li>
+                    </ui:repeat>
+                </ul>
+
+                <h:form styleClass="pure-form pure-form-aligned">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <h:outputLabel for="name" value="Genre"/>
+                            <h:inputText id="name" value="#{selectedGenre.name}">
+                                <f:validateRequired/>
+                                <f:validateLength minimum="3" maximum="50"/>
+                            </h:inputText>
+                        </div>
+                    </fieldset>
+
+                    <div class="pure-controls">
+                        <h:commandButton action="#{selectedGenre.doAddGenre}" value="#{msg['add.save']}"
+                                         styleClass="pure-button"/>
+                    </div>
+                </h:form>
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+</html>
