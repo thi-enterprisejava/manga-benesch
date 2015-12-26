@@ -15,23 +15,44 @@
 
     <div class="pure-menu pure-menu-horizontal navigation">
         <a class="pure-menu-heading">#{msg['navigation.title']}</a>
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="index.xhtml">#{msg['navigation.home']}</a>
-            </li>
+        <a class="pure-menu-link pure-menu-link-left" href="index.xhtml">#{msg['navigation.home']}</a>
+
+        <!--
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
+        </li>
+        -->
+
+        <ul class="pure-menu-list pure-menu-list-right">
             <!--
             <li class="pure-menu-item">
                 <a class="pure-menu-link" href="favourites.xhtml">#{msg['navigation.favourites']}</a>
             </li>
             -->
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="add.xhtml">#{msg['navigation.addmanga']}</a>
-            </li>
-            <!--
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
-            </li>
-            -->
+
+            <ui:fragment rendered="#{request.remoteUser == null}">
+                <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="login-redirect.xhtml">Login</a>
+                </li>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{request.remoteUser != null}">
+                <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="add.xhtml">#{msg['navigation.addmanga']}</a>
+                </li>
+
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                    <span class="pure-menu-link">#{request.remoteUser}</span>
+                    <ul class="pure-menu-children">
+                        <li class="pure-menu-item">
+                            <h:form rendered="#{request.remoteUser != null}">
+                                <h:commandLink value="Logout" action="#{userLogout.logout}"
+                                               styleClass="pure-menu-link"/>
+                            </h:form>
+                        </li>
+                    </ul>
+                </li>
+            </ui:fragment>
 
         </ul>
     </div>

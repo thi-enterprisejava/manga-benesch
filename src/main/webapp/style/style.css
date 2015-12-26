@@ -47,4 +47,12 @@ body {
     display: flex;
 }
 
+.pure-menu-link-left {
+    display: inline-block;
+}
+
+.pure-menu-list-right {
+    float: right;
+}
+
 
