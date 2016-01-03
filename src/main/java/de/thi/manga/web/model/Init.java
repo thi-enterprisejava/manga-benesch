@@ -5,15 +5,15 @@ import de.thi.manga.domain.Genre;
 import de.thi.manga.service.AccountService;
 import de.thi.manga.service.GenreService;
 import org.apache.log4j.Logger;
+import org.omnifaces.cdi.Startup;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.security.NoSuchAlgorithmException;
 
 @Named
-@ApplicationScoped
+@Startup
 public class Init {
 
     private final static Logger logger = Logger.getLogger(Init.class);
