@@ -4,7 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:o="http://omnifaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>#{selectedManga.manga.title}</title>
@@ -20,26 +20,74 @@
         <ui:define name="content">
 
             <div class="content">
-
                 <h1>#{selectedManga.manga.title}</h1>
 
-                <p>
-                    <h:outputLabel for="author" value="#{msg['add.author']}"/>
-                    <span id="author">#{selectedManga.manga.author}</span>
-                </p>
+                <div class="pure-g">
+                    <div class="pure-u-3-5">
 
-                <p>
-                    <h:outputLabel for="year" value="#{msg['add.year']}"/>
-                    <span id="year">#{selectedManga.manga.year}</span>
-                </p>
+                        <div class="pure-form-aligned">
+                            <div class="pure-control-group">
+                                <h:outputLabel for="author" value="Autor"/>
+                                <h:outputText id="author"
+                                              value="#{selectedManga.manga.author}">
+                                </h:outputText>
+                            </div>
 
-                <ul>
-                    <ui:repeat value="#{selectedManga.manga.genres}" var="genre">
-                        <li>
-                            #{genre.name}
-                        </li>
-                    </ui:repeat>
-                </ul>
+                            <div class="pure-control-group">
+                                <h:outputLabel for="publisher" value="Verlag"/>
+                                <h:outputText id="publisher"
+                                              value="#{selectedManga.manga.publisher}">
+                                </h:outputText>
+                            </div>
+
+                            <div class="pure-control-group">
+                                <h:outputLabel for="runFromYear" value="Jahr der Erstpublikation"/>
+                                <h:outputText id="runFromYear"
+                                              value="#{selectedManga.manga.runFromYear}">
+                                </h:outputText>
+                            </div>
+
+                            <div class="pure-control-group">
+                                <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
+                                <h:outputText id="runUntilYear"
+                                              value="#{selectedManga.manga.runFromYear}">
+                                </h:outputText>
+                            </div>
+
+                            <div class="pure-control-group">
+                                <h:outputLabel for="volumes" value="Ausgaben"/>
+                                <h:outputText id="volumes"
+                                              value="#{selectedManga.manga.volumes}">
+                                </h:outputText>
+                            </div>
+
+                            <div class="pure-control-group multiline-control-group tablelist">
+                                <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
+                                <ul>
+                                    <ui:repeat id="genres" value="#{selectedManga.manga.genres}" var="genre">
+                                        <li>
+                                            #{genre.name}
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </div>
+
+                            <div class="pure-control-group multiline-control-group">
+                                <h:outputLabel for="description" value="Beschreibung"/>
+
+                                <div id="description">
+                                    <pre><code id="">#{selectedManga.manga.description}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pure-u-2-5">
+                        <o:graphicImage styleClass="pure-img"
+                                        value="#{imageStreamer.getImageByMangaId(selectedManga.mangaId)}"
+                                        lastModified="#{startup.time}"/>
+                    </div>
+                </div>
 
             </div>
 

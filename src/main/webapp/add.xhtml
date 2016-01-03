@@ -4,7 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:o="http://omnifaces.org/ui"
       xml:lang="en" lang="en">
 <body>
 
@@ -14,50 +14,106 @@
         <div class="content">
             <h1>#{msg['add.header']}</h1>
 
-            <h:form styleClass="pure-form pure-form-aligned">
-                <fieldset>
-                    <div class="pure-control-group">
-                        <h:outputLabel for="title" value="#{msg['add.title']}" />
-                        <h:inputText id="title" value="#{selectedManga.manga.title}"
-                                     validatorMessage="#{msg['add.title.validationMessage']}">
-                            <f:validateRequired />
-                            <f:validateLength minimum="3" maximum="50" />
-                        </h:inputText>
-                        <h:message for="title" />
-                    </div>
+            <h:form styleClass="pure-form pure-form-aligned" enctype="multipart/form-data">
 
-                    <div class="pure-control-group">
-                        <h:outputLabel for="author" value="#{msg['add.author']}" />
-                        <h:inputText id="author" value="#{selectedManga.manga.author}"
-                                     validatorMessage="#{msg['add.author.validationMessage']}">
-                            <f:validateLength minimum="3" maximum="50" />
-                        </h:inputText>
-                        <h:message for="author" />
-                    </div>
+                <div class="pure-control-group">
+                    <h:outputLabel for="title" value="#{msg['add.title']}"/>
+                    <h:inputText id="title"
+                                 value="#{selectedManga.manga.title}"
+                                 validatorMessage="#{msg['add.title.validationMessage']}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                    </h:inputText>
+                </div>
 
-                    <div class="pure-control-group">
-                        <h:outputLabel for="year" value="#{msg['add.year']}" />
-                        <h:inputText id="year" value="#{selectedManga.manga.year}"
-                                     validatorMessage="#{msg['add.year.validationMessage']}">
-                            <f:validateLongRange minimum="1000" maximum="2200" />
-                        </h:inputText>
-                        <h:message for="year" />
-                    </div>
+                <div class="pure-control-group multiline-control-group">
+                    <o:importConstants type="de.thi.manga.validator.MangaCoverUploadValidator"/>
+                    <h:outputLabel for="fileUpload" value="Cover"/>
+                    <h:panelGroup id="fileUpload">
+                        <h:inputFile id="imageFile" value="#{selectedManga.imageFile}">
+                            <f:attribute name="maxSize" value="#{MangaCoverUploadValidator.MAX_FILESIZE}"/>
+                            <f:attribute name="matchType" value="#{MangaCoverUploadValidator.CONTENT_TYPE_REGEX}"/>
+                            <f:validator binding="#{mangaCoverUploadValidator}"/>
+                        </h:inputFile>
+                        <br/>
+                        (max. #{MangaCoverUploadValidator.MAX_FILESIZE_MB}MB)
+                    </h:panelGroup>
+                    <h:message id="imageFileMessage" for="imageFile" styleClass="validation-message-box"/>
+                </div>
 
-                    <div class="pure-control-group tablelist">
-                        <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
-                        <h:selectManyCheckbox id="genres" value="#{selectedManga.selectedGenreIds}">
-                            <f:selectItems value="#{selectedManga.listGenres}" var="genre"
-                                           itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
-                        </h:selectManyCheckbox>
-                        <h:message for="genres"/>
-                    </div>
+                <div class="pure-control-group">
+                    <h:outputLabel for="author" value="#{msg['add.author']}"/>
+                    <h:inputText id="author"
+                                 value="#{selectedManga.manga.author}"
+                                 validatorMessage="Der Autor darf maximal 50 Zeichen lang sein.">
+                        <f:validateLength maximum="50"/>
+                    </h:inputText>
+                    <h:message for="author" styleClass="validation-message-box"/>
+                </div>
 
-                    <div class="pure-controls">
-                        <h:commandButton action="#{selectedManga.doSave}" value="#{msg['add.save']}" styleClass="pure-button" />
-                    </div>
+                <div class="pure-control-group">
+                    <h:outputLabel for="publisher" value="Verlag"/>
+                    <h:inputText id="publisher"
+                                 value="#{selectedManga.manga.publisher}"
+                                 validatorMessage="Der Verlag darf maximal 50 Zeichen lang sein.">
+                        <f:validateLength maximum="50"/>
+                    </h:inputText>
+                    <h:message for="publisher" styleClass="validation-message-box"/>
+                </div>
 
-                </fieldset>
+                <div class="pure-control-group">
+                    <h:outputLabel for="runFromYear" value="Jahr der Erstpublikation"/>
+                    <h:inputText id="runFromYear" binding="#{runFromYear}"
+                                 value="#{selectedManga.manga.runFromYear}"
+                                 validatorMessage="Das Jahr muss zwischen 1000 und 2200 sein.">
+                        <f:validateLongRange minimum="1000" maximum="2200"/>
+                    </h:inputText>
+                    <h:message for="runFromYear" styleClass="validation-message-box"/>
+                </div>
+
+                <div class="pure-control-group">
+                    <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
+                    <h:inputText id="runUntilYear"
+                                 value="#{selectedManga.manga.runFromYear}">
+                        <f:attribute name="runFromYear" value="#{runFromYear}"/>
+                        <f:validator binding="#{mangaRunUntilYearValidator}"/>
+                    </h:inputText>
+                    <h:message for="runUntilYear" styleClass="validation-message-box"/>
+                </div>
+
+                <div class="pure-control-group">
+                    <h:outputLabel for="volumes" value="Ausgaben"/>
+                    <h:inputText id="volumes"
+                                 value="#{selectedManga.manga.volumes}"
+                                 validatorMessage="Die Anzahl der Ausgaben muss zwischen 0 und 1000 liegen.">
+                        <f:validateLongRange minimum="0" maximum="1000"/>
+                    </h:inputText>
+                    <h:message for="volumes" styleClass="validation-message-box"/>
+                </div>
+
+                <div class="pure-control-group tablelist">
+                    <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
+                    <h:selectManyCheckbox id="genres"
+                                          value="#{selectedManga.selectedGenreIds}">
+                        <f:selectItems value="#{selectedManga.listGenres}" var="genre"
+                                       itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
+                    </h:selectManyCheckbox>
+                    <h:message for="genres" styleClass="validation-message-box"/>
+                </div>
+
+                <div class="pure-control-group">
+                    <h:outputLabel for="description" value="Beschreibung"/>
+                    <h:inputTextarea id="description" rows="8" cols="60"
+                                     value="#{selectedManga.manga.description}"
+                                     validatorMessage="Die Beschreibung darf maximal 1000 Zeichen lang sein.">
+                        <f:validateLength maximum="1000"/>
+                    </h:inputTextarea>
+                    <h:message for="description" styleClass="validation-message-box"/>
+                </div>
+
+                <div class="pure-controls">
+                    <h:commandButton action="#{selectedManga.doSave}" value="#{msg['add.save']}"
+                                     styleClass="pure-button"/>
+                </div>
             </h:form>
 
         </div>

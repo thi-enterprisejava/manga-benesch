@@ -1,34 +1,45 @@
 @import url(http://yui.yahooapis.com/pure/0.6.0/pure-min.css);
 @import url(http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css);
 
+html, body {
+    height: 100%;
+    font-family: sans-serif;
+    font-weight: 100;
+    color: #333;
+}
+
 body {
     background-image: url(../images/akira-image.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    font-family: Helvetica;
+}
+
+h1 {
+    border-bottom: 1px solid black;
 }
 
 .navigation {
+    position: static;
     background-color: rgba(0, 0, 0, 1.0);
-    height: 34px;
+    top: 0px;
 }
 
 .content {
-    position: absolute;
+    position: relative;
     width: 80%;
-    bottom: 0px;
-    top: 34px;
-    left:10%;
-    padding: 30px 30px 30px 30px;
+    left: 10%;
+    min-height: 80%;
     background-color: rgba(255, 255, 255, 0.9);
     border-left: 2px solid black;
     border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 30px 10px 10px 30px;
 }
 
 .splash {
     position: absolute;
-    width: 300px;
+    width: 500px;
     margin: 0px 0 0 -150px;
     top: 50%;
     left: 50%;
@@ -37,6 +48,20 @@ body {
 .pure-button {
     color: black;
     background: darkorange;
+}
+
+.pure-form-aligned .pure-control-group label {
+    width: 14em;
+}
+
+.pure-menu-link {
+    background-color: black;
+    color: white;
+}
+
+.pure-menu-link:hover {
+    background-color: white;
+    color: black;
 }
 
 .tablelist table {
@@ -55,8 +80,31 @@ body {
     float: right;
 }
 
-.login-error {
+.pure-menu-horizontal {
+    white-space: normal;
+}
+
+.multiline-control-group {
+    display: inherit;
+}
+
+.validation-message-box {
     border: 1px dotted red;
     background-color: coral;
 }
+
+.multiline-control-group.tablelist ul {
+    padding-left: 0px;
+    -webkit-margin-before: 0px;
+}
+
+.multiline-control-group * {
+    display: inline-table;
+    margin: inherit;
+}
+
+.multiline-control-group.tablelist ul li {
+    display: table-row;
+}
+>>>>>>> bb929d81433e4957540f95dc0235727dee3b30e0
 

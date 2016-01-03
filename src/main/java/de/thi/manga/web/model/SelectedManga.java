@@ -4,10 +4,13 @@ import de.thi.manga.domain.Genre;
 import de.thi.manga.domain.Manga;
 import de.thi.manga.service.GenreService;
 import de.thi.manga.service.MangaService;
+import org.omnifaces.util.Utils;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.Part;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,6 +33,8 @@ public class SelectedManga implements Serializable {
     private Long mangaId;
     private List<Genre> genres;
     private List<String> selectedGenreIds;
+
+    private Part imageFile;
 
     public Manga getManga() {
         return manga;
@@ -55,14 +60,26 @@ public class SelectedManga implements Serializable {
         this.selectedGenreIds = selectedGenreIds;
     }
 
-    public String doSave() {
+    public Part getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Part imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public String doSave() throws IOException {
         manga.setGenres(convertToGenreList(selectedGenreIds));
+
+        if (imageFile != null) {
+            manga.setCover(Utils.toByteArray(imageFile.getInputStream()));
+        }
 
         mangaService.add(manga);
         log.info("Created manga");
         log.info("Autor: " + manga.getAuthor());
         log.info("Title: " + manga.getTitle());
-        log.info("Year: " + manga.getYear());
+        log.info("Cover: " + manga.getCover() == null ? "Nein" : "Ja");
         manga.getGenres().forEach(
                 g -> log.info("Genre: " + g.getId() + ": " + g.getName()));
 
