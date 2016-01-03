@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:o="http://omnifaces.org/ui"
+      xml:lang="en" lang="en">
+<body>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <o:importConstants type="de.thi.manga.service.AccountService"/>
+
+        <div class="content">
+            <h:form class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <h:outputLabel for="accountName" value="Account Name"/>
+                        <h:inputText id="accountName" value="#{registerAccount.accountName}" required="true"
+                                     maxlength="#{AccountService.MAX_ACCOUNT_NAME_LENGTH}">
+                            <f:validator binding="#{accountNameValidator}"/>
+                        </h:inputText>
+                        <h:message for="accountName"/>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="password" value="Passwort"/>
+                        <h:inputSecret id="password" value="#{registerAccount.password}"
+                                       required="true" maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">
+                            <f:validator binding="#{passwordValidator}"/>
+                        </h:inputSecret>
+                        <h:message for="password"/>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="passwordConfirm" value="Passwort wiederholen"/>
+                        <h:inputSecret id="passwordConfirm" value="#{registerAccount.passwordConfirm}" required="true"
+                                       maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">
+                            <o:validateEqual id="passwordsEqual" components="password passwordConfirm"
+                                             message="Passwörter sind nicht gleich" showMessageFor="passwordConfirm"/>
+                        </h:inputSecret>
+                        <h:message for="passwordConfirm"/>
+                    </div>
+
+                    <div class="pure-controls">
+                        <h:commandButton action="#{registerAccount.doRegister}" value="Registrieren"
+                                         styleClass="pure-button"/>
+                    </div>
+                </fieldset>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</body>
+</html>
