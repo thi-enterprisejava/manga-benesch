@@ -26,6 +26,16 @@
                     </div>
 
                     <div class="pure-control-group">
+                        <h:outputLabel for="displayName" value="Anzeigename"/>
+                        <h:inputText id="displayName" value="#{registerAccount.displayName}" required="true"
+                                     maxlength="#{AccountService.MAX_ACCOUNT_DISPLAYNAME_LENGTH}">
+                            <f:validateLength maximum="#{AccountService.MAX_ACCOUNT_DISPLAYNAME_LENGTH}"/>
+                            <f:validateRequired/>
+                        </h:inputText>
+                        <h:message for="accountName" styleClass="validation-message-box"/>
+                    </div>
+
+                    <div class="pure-control-group">
                         <h:outputLabel for="password" value="Passwort"/>
                         <h:inputSecret id="password" value="#{registerAccount.password}"
                                        required="true" maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">

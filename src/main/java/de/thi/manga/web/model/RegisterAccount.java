@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.ServletException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class RegisterAccount implements Serializable {
 
     private String accountName;
+    private String displayName;
     private String password;
     private String passwordConfirm;
 
@@ -27,6 +29,14 @@ public class RegisterAccount implements Serializable {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getPassword() {
@@ -45,8 +55,8 @@ public class RegisterAccount implements Serializable {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public String doRegister() throws NoSuchAlgorithmException, ServletException {
-        accountService.createAccount(accountName, password);
+    public String doRegister() throws NoSuchAlgorithmException, ServletException, IOException {
+        accountService.createAccount(accountName, displayName, password);
         Faces.login(accountName, password);
 
         return "index.xhtml";

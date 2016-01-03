@@ -1,3 +1,4 @@
+
 package de.thi.manga.service;
 
 import de.thi.manga.domain.Account;
@@ -16,10 +17,11 @@ import java.util.Locale;
 public class AccountService {
 
     public static final int MAX_ACCOUNT_NAME_LENGTH = 30;
+    public static final int MAX_ACCOUNT_DISPLAYNAME_LENGTH = 30;
     public static final int MIN_PASSWORD_LENGTH = 4;
     public static final int MAX_PASSWORD_LENGTH = 50;
 
-    private static final String DEFAULT_ROLE = "user";
+    public static final String DEFAULT_ROLE = "user";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -29,13 +31,20 @@ public class AccountService {
         return query.getResultList();
     }
 
-    public void createAccount(String name, String password) throws NoSuchAlgorithmException {
-        createAccount(name, password, DEFAULT_ROLE);
+    public Account findAccountByName(String name) {
+        TypedQuery<Account> query = entityManager.createQuery("SELECT u FROM Account as u WHERE u.name = :name", Account.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
     }
 
-    public void createAccount(String name, String password, String role) throws NoSuchAlgorithmException {
+    public void createAccount(String name, String displayName, String password) throws NoSuchAlgorithmException {
+        createAccount(name, displayName, password, DEFAULT_ROLE);
+    }
+
+    public void createAccount(String name, String displayName, String password, String role) throws NoSuchAlgorithmException {
         Account account = new Account();
         account.setName(transformAccountName(name));
+        account.setDisplayName(displayName);
         account.setPassword(encodePassword(password));
         account.setRole(role);
         entityManager.persist(account);

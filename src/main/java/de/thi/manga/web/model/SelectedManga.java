@@ -94,11 +94,12 @@ public class SelectedManga implements Serializable {
         return genres;
     }
 
+    /**
+     * Wird in details.xhtml aufgerufen.
+     * Der Manga wird immer gesetzt und ist <i>null</i>, wenn kein Manga unter dieser mangaId angelegt ist.
+     */
     public void init() {
-        Manga foundManga = mangaService.findById(mangaId);
-        if (foundManga != null) {
-            this.manga = foundManga;
-        }
+        this.manga = mangaService.findById(mangaId);
     }
 
     private List<Genre> convertToGenreList(List<String> genreIds) {

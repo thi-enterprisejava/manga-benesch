@@ -1,5 +1,6 @@
 package de.thi.manga.web.model;
 
+import de.thi.manga.domain.Manga;
 import de.thi.manga.service.MangaService;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,10 +18,13 @@ public class ImageStreamer {
         if (id == null) {
             return new byte[0];
         }
-        System.out.println("Id: " + id);
-        System.out.println("Found Manga: " + mangaService.findById(id));
-        System.out.println("Found Manga image: " + mangaService.findById(id).getCover());
-        return mangaService.findById(id).getCover();
+        Manga manga = mangaService.findById(id);
+        try {
+            return manga.getCover();
+        } catch (NullPointerException e) {
+            //kein Cover
+            return new byte[0];
+        }
     }
 
 }

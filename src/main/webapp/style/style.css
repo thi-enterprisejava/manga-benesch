@@ -107,3 +107,24 @@ h1 {
     display: table-row;
 }
 
+.inline-form {
+    display: inline-block;
+}
+
+.mangalist-button {
+    border: none;
+    width: 50px;
+    height: 40px;
+    background-size: auto 50px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.mangalist-add {
+    background-image: url(../images/mangalist-add.png);
+}
+
+.mangalist-added {
+    background-image: url(../images/mangalist-added.png);
+}
+

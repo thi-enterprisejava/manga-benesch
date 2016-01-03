@@ -20,7 +20,29 @@
         <ui:define name="content">
 
             <div class="content">
-                <h1>#{selectedManga.manga.title}</h1>
+
+                <ui:fragment rendered="#{selectedManga.manga == null}">
+                    <h1>Ups</h1>
+
+                    <div>Dieser Manga konnte nicht gefunden werden.</div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{selectedManga.manga != null}">
+                    <h1>
+                        #{selectedManga.manga.title}
+                        <h:panelGroup rendered="#{accountBean.loggedIn}">
+                            <h:form styleClass="inline-form">
+                                <h:commandButton rendered="#{not mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
+                                                 action="#{mangaListBean.addManga(selectedManga.manga)}" value=""
+                                                 styleClass="pure-img mangalist-button mangalist-add"
+                                                 alt="Zu Meine Mangas hinzufügen"/>
+                                <h:commandButton rendered="#{mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
+                                                 action="#{mangaListBean.removeManga(selectedManga.manga)}" value=""
+                                                 styleClass="pure-img mangalist-button mangalist-added"
+                                                 alt="Von Meine Mangas entfernen"/>
+                            </h:form>
+                        </h:panelGroup>
+                    </h1>
 
                 <div class="pure-g">
                     <div class="pure-u-3-5">
@@ -89,6 +111,7 @@
                     </div>
                 </div>
 
+                </ui:fragment>
             </div>
 
         </ui:define>

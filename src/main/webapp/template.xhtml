@@ -22,6 +22,9 @@
             <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
         </li>
         -->
+        <ui:fragment rendered="#{accountBean.loggedIn}">
+            <a class="pure-menu-link pure-menu-link-left" href="mangalist.xhtml">Meine Mangas</a>
+        </ui:fragment>
 
         <ul class="pure-menu-list pure-menu-list-right">
             <!--
@@ -30,23 +33,23 @@
             </li>
             -->
 
-            <ui:fragment rendered="#{request.remoteUser == null}">
+            <ui:fragment rendered="#{not accountBean.loggedIn}">
                 <li class="pure-menu-item">
                     <a class="pure-menu-link" href="login-redirect.xhtml">Login</a>
                 </li>
             </ui:fragment>
 
-            <ui:fragment rendered="#{request.remoteUser != null}">
+            <ui:fragment rendered="#{accountBean.loggedIn}">
                 <li class="pure-menu-item">
                     <a class="pure-menu-link" href="add.xhtml">#{msg['navigation.addmanga']}</a>
                 </li>
 
                 <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                    <span class="pure-menu-link">#{request.remoteUser}</span>
+                    <span class="pure-menu-link">#{accountBean.displayName}</span>
                     <ul class="pure-menu-children">
                         <li class="pure-menu-item">
-                            <h:form rendered="#{request.remoteUser != null}">
-                                <h:commandLink value="Logout" action="#{userLogout.logout}"
+                            <h:form rendered="#{accountBean.loggedIn}">
+                                <h:commandLink value="Logout" action="#{accountBean.doLogout}"
                                                styleClass="pure-menu-link"/>
                             </h:form>
                         </li>

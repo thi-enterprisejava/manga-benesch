@@ -62,7 +62,7 @@ public class Init {
         }
 
         try {
-            userService.createAccount("daniel", "1234", "user");
+            userService.createAccount("daniel", "Daniel", "1234", AccountService.DEFAULT_ROLE);
         } catch (NoSuchAlgorithmException e) {
             logger.warn("Could not init users", e);
         }
