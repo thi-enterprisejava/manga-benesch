@@ -14,11 +14,19 @@ public class Manga implements Serializable {
 
     private String title;
     private String author;
+    private String publisher;
+
+    private int runFromYear;
+    private int runUntilYear;
+    private int volumes;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Genre> genres = new ArrayList<>();
 
-    private int year;
+    @Lob
+    private byte[] cover;
+
+    private String description;
 
     public Long getId() {
         return id;
@@ -44,6 +52,38 @@ public class Manga implements Serializable {
         this.author = author;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getRunFromYear() {
+        return runFromYear;
+    }
+
+    public void setRunFromYear(int year) {
+        this.runFromYear = year;
+    }
+
+    public int getRunUntilYear() {
+        return runUntilYear;
+    }
+
+    public void setRunUntilYear(int runUntilYear) {
+        this.runUntilYear = runUntilYear;
+    }
+
+    public int getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(int volumes) {
+        this.volumes = volumes;
+    }
+
     public List<Genre> getGenres() {
         return genres;
     }
@@ -52,12 +92,19 @@ public class Manga implements Serializable {
         this.genres = genres;
     }
 
-    public int getYear() {
-        return year;
+    public byte[] getCover() {
+        return cover;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setCover(byte[] image) {
+        this.cover = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

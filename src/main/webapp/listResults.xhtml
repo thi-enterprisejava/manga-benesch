@@ -20,7 +20,7 @@
             <ul>
                 <ui:repeat value="#{searchManga.results}" var="manga">
                     <li>
-                        <a href="details.xhtml?manga=#{manga.id}">#{manga.title} [#{manga.author} / #{manga.year}]</a>
+                        <a href="details.xhtml?manga=#{manga.id}">#{manga.title} [#{manga.author} / #{manga.runFromYear}]</a>
                     </li>
                 </ui:repeat>
             </ul>

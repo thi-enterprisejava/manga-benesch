@@ -27,7 +27,7 @@ public class AccountNameValidator implements Validator {
         }
 
         if (accountService.isAccountExists(accountName)) {
-            throw new ValidatorException(new FacesMessage("Account existiert bereits"));
+            throw new ValidatorException(new FacesMessage("Der Account existiert bereits."));
         }
     }
 }

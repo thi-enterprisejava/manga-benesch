@@ -22,7 +22,7 @@
                                      maxlength="#{AccountService.MAX_ACCOUNT_NAME_LENGTH}">
                             <f:validator binding="#{accountNameValidator}"/>
                         </h:inputText>
-                        <h:message for="accountName"/>
+                        <h:message for="accountName" styleClass="validation-message-box"/>
                     </div>
 
                     <div class="pure-control-group">
@@ -31,7 +31,7 @@
                                        required="true" maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">
                             <f:validator binding="#{passwordValidator}"/>
                         </h:inputSecret>
-                        <h:message for="password"/>
+                        <h:message for="password" styleClass="validation-message-box"/>
                     </div>
 
                     <div class="pure-control-group">
@@ -41,7 +41,7 @@
                             <o:validateEqual id="passwordsEqual" components="password passwordConfirm"
                                              message="Passwörter sind nicht gleich" showMessageFor="passwordConfirm"/>
                         </h:inputSecret>
-                        <h:message for="passwordConfirm"/>
+                        <h:message for="passwordConfirm" styleClass="validation-message-box"/>
                     </div>
 
                     <div class="pure-controls">
