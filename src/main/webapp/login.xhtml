@@ -12,23 +12,8 @@
 
         <div class="content">
 
-            <form method="post" action="j_security_check" class="pure-form pure-form-aligned">
-                <fieldset>
-                    <div class="pure-control-group">
-                        <label for="j_username">Username</label>
-                        <input id="j_username" name="j_username" type="text"/>
-                    </div>
+            <ui:include src="login-template.xhtml"/>
 
-                    <div class="pure-control-group">
-                        <label for="j_password">Password</label>
-                        <input id="j_password" name="j_password" type="password"/>
-                    </div>
-
-                    <div class="pure-controls">
-                        <button type="submit" class="pure-button pure-button-primary">Login</button>
-                    </div>
-                </fieldset>
-            </form>
         </div>
 
     </ui:define>

@@ -8,11 +8,11 @@ import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.security.NoSuchAlgorithmException;
 
-@ManagedBean(eager = true)
+@Named
 @ApplicationScoped
 public class Init {
 
@@ -52,6 +52,7 @@ public class Init {
         genreService.add(new Genre("Shoujo"));
         genreService.add(new Genre("Josei"));
 
+        logger.debug("Genres initialized:");
         logger.debug(genreService.findAll().toString());
     }
 
