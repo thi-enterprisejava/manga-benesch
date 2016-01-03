@@ -20,7 +20,7 @@ body {
     bottom: 0px;
     top: 34px;
     left:10%;
-    padding: 30px 10px 10px 30px;
+    padding: 30px 30px 30px 30px;
     background-color: rgba(255, 255, 255, 0.9);
     border-left: 2px solid black;
     border-right: 2px solid black;
@@ -47,4 +47,16 @@ body {
     display: flex;
 }
 
+.pure-menu-link-left {
+    display: inline-block;
+}
+
+.pure-menu-list-right {
+    float: right;
+}
+
+.login-error {
+    border: 1px dotted red;
+    background-color: coral;
+}
 
