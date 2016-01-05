@@ -16,13 +16,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
 public class SelectedManga implements Serializable {
-
-    static final Logger log = Logger.getLogger("SelectedManga");
 
     @EJB
     private MangaService mangaService;
@@ -75,6 +73,12 @@ public class SelectedManga implements Serializable {
         return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
     }
 
+    public String doUpdate() throws IOException {
+        updateSelectedManga();
+        mangaService.update(manga);
+        return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
+    }
+
     private void updateSelectedManga() throws IOException {
         manga.setGenres(convertToGenreList(selectedGenreIds));
 
@@ -96,16 +100,22 @@ public class SelectedManga implements Serializable {
      * Leitet auf eine Fehlerseite weiter, wenn der Manga mit dieser mangaId nicht existiert.
      */
     public void init() throws IOException {
+        if (mangaId == null) {
+            Faces.redirect("notfound.xhtml");
+        }
         this.manga = mangaService.findById(mangaId);
         if (this.manga == null) {
             Faces.redirect("notfound.xhtml");
         }
+        this.selectedGenreIds = manga.getGenres().stream()
+                .map(genre -> genre.getId().toString())
+                .collect(Collectors.toList());
     }
 
     private List<Genre> convertToGenreList(List<String> genreIds) {
         List<Genre> genres = new ArrayList<>(genreIds.size());
         for (String genreId : genreIds) {
-            long id = Long.valueOf(genreId);
+            Long id = Long.valueOf(genreId);
             for (Iterator<Genre> iterator = this.genres.iterator(); iterator.hasNext(); ) {
                 Genre next = iterator.next();
                 if (id == next.getId()) {

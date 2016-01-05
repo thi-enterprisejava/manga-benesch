@@ -23,7 +23,8 @@
 
                 <h1>
                     #{selectedManga.manga.title}
-                    <h:panelGroup rendered="#{accountBean.loggedIn}" id="add-manga-to-mangalist">
+                    <h:panelGroup rendered="#{accountBean.loggedIn}" id="add-manga-to-mangalist"
+                                  styleClass="float-right">
                         <h:form styleClass="inline-form">
                             <h:commandButton rendered="#{not mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
                                              styleClass="pure-img mangalist-button mangalist-add"
@@ -32,11 +33,17 @@
                                         render="add-manga-to-mangalist"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
-                                             styleClass="pure-img mangalist-button mangalist-added"
+                                             styleClass="pure-img mangalist-button mangalist-remove"
                                              alt="Von Meine Mangas entfernen" value="">
                                 <f:ajax listener="#{mangaListBean.removeManga(selectedManga.manga)}"
                                         render="add-manga-to-mangalist"/>
                             </h:commandButton>
+                        </h:form>
+                        <h:form styleClass="inline-form">
+                            <a href="edit.xhtml?manga=#{selectedManga.mangaId}">
+                                <img class="pure-img control-button" src="images/edit.png"
+                                     alt="Manga bearbeiten"/>
+                            </a>
                         </h:form>
                     </h:panelGroup>
                 </h1>

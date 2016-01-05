@@ -45,7 +45,7 @@ h1 {
     left: 50%;
 }
 
-input:not(:first-child), select:not(:first-child) {
+:not(.pure-control-group) > input:not(:first-child), select:not(:first-child) {
     margin-left: 5px;
 }
 
@@ -80,7 +80,7 @@ input:not(:first-child), select:not(:first-child) {
     display: inline-block;
 }
 
-.pure-menu-list-right {
+.pure-menu-list-right, .float-right {
     float: right;
 }
 
@@ -115,28 +115,35 @@ input:not(:first-child), select:not(:first-child) {
     display: inline-block;
 }
 
-.mangalist-button, .mangalist-button-small {
+.mangalist-button, .mangalist-list-button, .control-button {
     border: none;
-    width: 50px;
-    height: 40px;
-    background-size: auto 50px;
+    width: 1em;
+    height: 1em;
+    background-size: auto 1em;
     background-repeat: no-repeat;
     background-color: transparent;
 }
 
-.mangalist-button-small {
-    background-size: auto 40px;
+.mangalist-list-button {
+    width: 2em;
+    height: 2em;
+    background-size: auto 2em;
+}
+
+.edit-cover-image {
+    max-height: 500px;
+    max-width: 500px;
 }
 
 .mangalist-add {
     background-image: url(../images/mangalist-add.png);
 }
 
-.mangalist-added {
-    background-image: url(../images/mangalist-added.png);
-}
-
 .mangalist-remove {
     background-image: url(../images/mangalist-remove.png);
+}
+
+.manga-edit {
+    background-image: url(../images/edit.png);
 }
 

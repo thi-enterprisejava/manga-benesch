@@ -18,6 +18,10 @@ public class MangaService {
         entityManager.persist(manga);
     }
 
+    public Manga update(Manga manga) {
+        return entityManager.merge(manga);
+    }
+
     public List<Manga> findAll() {
         TypedQuery<Manga> query = entityManager.createQuery("SELECT m FROM Manga as m", Manga.class);
         return query.getResultList();
