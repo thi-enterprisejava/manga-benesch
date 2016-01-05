@@ -4,6 +4,7 @@ import de.thi.manga.domain.Genre;
 import de.thi.manga.domain.Manga;
 import de.thi.manga.service.GenreService;
 import de.thi.manga.service.MangaService;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Utils;
 
 import javax.ejb.EJB;
@@ -68,22 +69,18 @@ public class SelectedManga implements Serializable {
         this.imageFile = imageFile;
     }
 
-    public String doSave() throws IOException {
+    public String doAdd() throws IOException {
+        updateSelectedManga();
+        mangaService.add(manga);
+        return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
+    }
+
+    private void updateSelectedManga() throws IOException {
         manga.setGenres(convertToGenreList(selectedGenreIds));
 
         if (imageFile != null) {
             manga.setCover(Utils.toByteArray(imageFile.getInputStream()));
         }
-
-        mangaService.add(manga);
-        log.info("Created manga");
-        log.info("Autor: " + manga.getAuthor());
-        log.info("Title: " + manga.getTitle());
-        log.info("Cover: " + manga.getCover() == null ? "Nein" : "Ja");
-        manga.getGenres().forEach(
-                g -> log.info("Genre: " + g.getId() + ": " + g.getName()));
-
-        return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
     }
 
     public List<Genre> getListGenres() {
@@ -95,11 +92,14 @@ public class SelectedManga implements Serializable {
     }
 
     /**
-     * Wird in details.xhtml aufgerufen.
-     * Der Manga wird immer gesetzt und ist <i>null</i>, wenn kein Manga unter dieser mangaId angelegt ist.
+     * ViewAction zum initialisieren bestehender Mangas.
+     * Leitet auf eine Fehlerseite weiter, wenn der Manga mit dieser mangaId nicht existiert.
      */
-    public void init() {
+    public void init() throws IOException {
         this.manga = mangaService.findById(mangaId);
+        if (this.manga == null) {
+            Faces.redirect("notfound.xhtml");
+        }
     }
 
     private List<Genre> convertToGenreList(List<String> genreIds) {
