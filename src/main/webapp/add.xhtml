@@ -70,13 +70,16 @@
                     <h:message for="runFromYear" styleClass="validation-message-box"/>
                 </div>
 
-                <div class="pure-control-group">
+                <div class="pure-control-group multiline-control-group">
                     <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
-                    <h:inputText id="runUntilYear"
-                                 value="#{selectedManga.manga.runFromYear}">
-                        <f:attribute name="runFromYear" value="#{runFromYear}"/>
-                        <f:validator binding="#{mangaRunUntilYearValidator}"/>
-                    </h:inputText>
+                    <h:panelGroup id="runUntilYear">
+                        <h:inputText value="#{selectedManga.manga.runFromYear}">
+                            <f:attribute name="runFromYear" value="#{runFromYear}"/>
+                            <f:validator binding="#{mangaRunUntilYearValidator}"/>
+                        </h:inputText>
+                        <br/>
+                        0 = ongoing
+                    </h:panelGroup>
                     <h:message for="runUntilYear" styleClass="validation-message-box"/>
                 </div>
 

@@ -27,6 +27,7 @@
                         <th>Von</th>
                         <th>Bis</th>
                         <th>Volumes</th>
+                        <th>Entfernen</th>
                     </tr>
                     </thead>
 
@@ -38,12 +39,19 @@
                             <td>#{manga.publisher}</td>
                             <td>
                                 <ui:repeat value="#{manga.genres}" var="genre" varStatus="loop">
-                                    #{genre.name}#{!loop.last ? ', ' : ''}
+                                    <a href="search.xhtml?genreId=#{genre.id}">#{genre.name}</a>#{!loop.last ? ', ' : ''}
                                 </ui:repeat>
                             </td>
                             <td>#{manga.runFromYear}</td>
                             <td>#{manga.runUntilYear == 0?"ongoing":manga.runUntilYear}</td>
                             <td>#{manga.volumes}</td>
+                            <td>
+                                <h:form styleClass="inline-form">
+                                    <h:commandButton styleClass="pure-img mangalist-button-small mangalist-remove"
+                                                     alt="Zu Meine Mangas hinzufügen" value=""
+                                                     action="#{mangaListBean.removeManga(manga)}"/>
+                                </h:form>
+                            </td>
                         </tr>
                     </ui:repeat>
                     </tbody>

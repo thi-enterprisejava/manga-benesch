@@ -46,22 +46,21 @@ public class MangaListBean implements Serializable {
         return mangaList.getMangas();
     }
 
-    public String addManga(Manga manga) {
+    public void addManga(Manga manga) {
+        System.out.println("manga added called " + manga.getId());
         List<Manga> mangas = getMangas();
         if (!isMangaOnMangaList(manga)) {
             mangas.add(manga);
             mangaList = mangaListService.update(mangaList);
         }
-
-        return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
+        System.out.println("manga added " + manga.getId());
     }
 
-    public String removeManga(Manga manga) {
+    public void removeManga(Manga manga) {
         if (getMangas().removeIf(mangaInList -> mangaInList.getId() == manga.getId())) {
             mangaList = mangaListService.update(mangaList);
         }
-
-        return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
+        System.out.println("manga removed " + manga.getId());
     }
 
     public boolean isMangaOnMangaList(Manga manga) {

@@ -18,7 +18,6 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Authorized Users</web-resource-name>
-            <url-pattern>/login-redirect.xhtml</url-pattern>
             <url-pattern>/add.xhtml</url-pattern>
             <url-pattern>/mangalist.xhtml</url-pattern>
             <url-pattern>/api/*</url-pattern>

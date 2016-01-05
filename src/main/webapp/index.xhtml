@@ -12,7 +12,7 @@
     <ui:define name="content">
 
         <h:form styleClass="splash pure-form">
-            <h:inputText value="#{searchManga.searchString}">
+            <h:inputText value="#{searchManga.title}">
                 <f:passThroughAttribute name="placeholder" value="#{msg['index.search.placeholder']}" />
             </h:inputText>
             <h:commandButton action="#{searchManga.doSearch}" value="#{msg['index.search.button']}"

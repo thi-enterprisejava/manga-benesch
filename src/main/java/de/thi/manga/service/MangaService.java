@@ -1,6 +1,5 @@
 package de.thi.manga.service;
 
-import de.thi.manga.domain.Genre;
 import de.thi.manga.domain.Manga;
 
 import javax.ejb.Stateless;
@@ -30,9 +29,16 @@ public class MangaService {
         return query.getResultList();
     }
 
-    public List<Manga> findByGenre(Genre genre) {
-        TypedQuery<Manga> query = entityManager.createQuery("SELECT m FROM Manga as m WHERE m.title = :genre", Manga.class);
-        query.setParameter("genre", genre);
+    public List<Manga> findByGenreId(Long genreId) {
+        TypedQuery<Manga> query = entityManager.createQuery("SELECT m FROM Manga as m WHERE :genreId IN (SELECT g.id FROM m.genres as g)", Manga.class);
+        query.setParameter("genreId", genreId);
+        return query.getResultList();
+    }
+
+    public List<Manga> findByTitleAndGenreId(String title, Long genreId) {
+        TypedQuery<Manga> query = entityManager.createQuery("SELECT m FROM Manga as m WHERE m.title LIKE :title AND :genreId IN (SELECT g.id FROM m.genres as g)", Manga.class);
+        query.setParameter("title", title + "%");
+        query.setParameter("genreId", genreId);
         return query.getResultList();
     }
 

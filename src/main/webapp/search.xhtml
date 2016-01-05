@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<head>
+    <title>Ergebnisse</title>
+    <f:metadata>
+        <f:viewParam name="title" value="#{searchManga.title}"/>
+        <f:viewParam name="genreId" value="#{searchManga.genreId}"/>
+        <f:viewAction action="#{searchManga.initResults}"/>
+    </f:metadata>
+</head>
+<body>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <div class="content">
+
+            <h1>Suche</h1>
+
+            <div>
+                <h:form styleClass="pure-form pure-form-aligned">
+                    <fieldset>
+                        <h:inputText id="title" value="#{searchManga.title}">
+                            <f:passThroughAttribute name="placeholder" value="Titel"/>
+                        </h:inputText>
+
+                        <h:selectOneMenu id="genre" value="#{searchManga.genreId}">
+                            <f:selectItem itemValue="#{null}" itemLabel="--Genre--"/>
+                            <f:selectItems value="#{searchManga.listGenres}" var="genre"
+                                           itemValue="#{genre.id}" itemLabel="#{genre.name}"/>
+                        </h:selectOneMenu>
+
+                        <h:commandButton action="#{searchManga.doSearch}" value="Suchen"
+                                         styleClass="pure-button"/>
+                    </fieldset>
+                </h:form>
+            </div>
+
+            <ui:fragment rendered="#{not empty searchManga.results}">
+                <table class="pure-table pure-table-striped">
+                    <thead>
+                    <tr>
+                        <th>Manga</th>
+                        <th>Author</th>
+                        <th>Publisher</th>
+                        <th>Genres</th>
+                        <th>Von</th>
+                        <th>Bis</th>
+                        <th>Volumes</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                <ui:repeat value="#{searchManga.results}" var="manga">
+                    <tr>
+                        <td><a href="details.xhtml?manga=#{manga.id}">#{manga.title}</a></td>
+                        <td>#{manga.author}</td>
+                        <td>#{manga.publisher}</td>
+                        <td>
+                            <ui:repeat value="#{manga.genres}" var="genre" varStatus="loop">
+                                <a href="search.xhtml?genreId=#{genre.id}">#{genre.name}</a>#{!loop.last ? ', ' : ''}
+                            </ui:repeat>
+                        </td>
+                        <td>#{manga.runFromYear}</td>
+                        <td>#{manga.runUntilYear == 0?"ongoing":manga.runUntilYear}</td>
+                        <td>#{manga.volumes}</td>
+                    </tr>
+                </ui:repeat>
+                    </tbody>
+                </table>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{empty searchManga.results}">
+                Die Suche lieferte keine Ergebnisse.
+            </ui:fragment>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</body>
+</html>

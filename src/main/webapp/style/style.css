@@ -111,7 +111,7 @@ h1 {
     display: inline-block;
 }
 
-.mangalist-button {
+.mangalist-button, .mangalist-button-small {
     border: none;
     width: 50px;
     height: 40px;
@@ -120,11 +120,19 @@ h1 {
     background-color: transparent;
 }
 
+.mangalist-button-small {
+    background-size: auto 40px;
+}
+
 .mangalist-add {
     background-image: url(../images/mangalist-add.png);
 }
 
 .mangalist-added {
     background-image: url(../images/mangalist-added.png);
+}
+
+.mangalist-remove {
+    background-image: url(../images/mangalist-remove.png);
 }
 

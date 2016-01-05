@@ -17,25 +17,14 @@
         <a class="pure-menu-heading">#{msg['navigation.title']}</a>
         <a class="pure-menu-link pure-menu-link-left" href="index.xhtml">#{msg['navigation.home']}</a>
 
-        <!--
-        <li class="pure-menu-item">
-            <a class="pure-menu-link" href="search.xhtml">#{msg['navigation.search']}</a>
-        </li>
-        -->
         <ui:fragment rendered="#{accountBean.loggedIn}">
             <a class="pure-menu-link pure-menu-link-left" href="mangalist.xhtml">Meine Mangas</a>
         </ui:fragment>
 
         <ul class="pure-menu-list pure-menu-list-right">
-            <!--
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="favourites.xhtml">#{msg['navigation.favourites']}</a>
-            </li>
-            -->
-
             <ui:fragment rendered="#{not accountBean.loggedIn}">
                 <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="login-redirect.xhtml">Login</a>
+                    <a class="pure-menu-link" href="mangalist.xhtml">Login</a>
                 </li>
             </ui:fragment>
 
