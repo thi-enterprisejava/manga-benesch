@@ -33,8 +33,8 @@
 
                     <tbody>
                     <ui:repeat value="#{mangaListBean.mangas}" var="manga">
-                        <tr>
-                            <td><a href="details.xhtml?manga=#{manga.id}">#{manga.title}</a></td>
+                        <tr class="mangalistEntry">
+                            <td><a href="details.xhtml?manga=#{manga.id}" class="mangaDetails">#{manga.title}</a></td>
                             <td>#{manga.author}</td>
                             <td>#{manga.publisher}</td>
                             <td>

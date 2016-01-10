@@ -19,10 +19,6 @@ public class GenreService {
         return query.getResultList();
     }
 
-    public Genre findById(Long id) {
-        return entityManager.find(Genre.class, id);
-    }
-
     public void add(Genre genre) {
         entityManager.persist(genre);
     }

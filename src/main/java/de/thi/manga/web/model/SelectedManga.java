@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 public class SelectedManga implements Serializable {
 
     @EJB
-    private MangaService mangaService;
+    private transient MangaService mangaService;
 
     @EJB
-    private GenreService genreService;
+    private transient GenreService genreService;
 
     private Manga manga = new Manga();
     private Long mangaId;
@@ -113,18 +113,18 @@ public class SelectedManga implements Serializable {
     }
 
     private List<Genre> convertToGenreList(List<String> genreIds) {
-        List<Genre> genres = new ArrayList<>(genreIds.size());
+        List<Genre> genresResult = new ArrayList<>(genreIds.size());
         for (String genreId : genreIds) {
             Long id = Long.valueOf(genreId);
-            for (Iterator<Genre> iterator = this.genres.iterator(); iterator.hasNext(); ) {
+            for (Iterator<Genre> iterator = this.getListGenres().iterator(); iterator.hasNext(); ) {
                 Genre next = iterator.next();
                 if (id == next.getId()) {
-                    genres.add(next);
+                    genresResult.add(next);
                     break;
                 }
             }
         }
-        return genres;
+        return genresResult;
     }
 
 }

@@ -34,6 +34,7 @@ public class Messages extends ResourceBundle {
     }
 
     protected static class UTF8Control extends Control {
+        @Override
         public ResourceBundle newBundle
                 (String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
                 throws IllegalAccessException, InstantiationException, IOException {

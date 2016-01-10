@@ -45,7 +45,7 @@
                         (max. #{MangaCoverUploadValidator.MAX_FILESIZE_MB}MB)
                         <br/>
                         <o:graphicImage styleClass="pure-img edit-cover-image"
-                                        value="#{imageStreamer.getImageByMangaId(selectedManga.mangaId)}"
+                                        value="#{imageStreamer.coverByMangaId(selectedManga.mangaId)}"
                                         lastModified="#{startup.time}"/>
                     </h:panelGroup>
                     <h:message id="imageFileMessage" for="imageFile" styleClass="validation-message-box"/>

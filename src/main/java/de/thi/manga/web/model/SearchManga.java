@@ -16,10 +16,10 @@ import java.util.List;
 public class SearchManga implements Serializable {
 
     @EJB
-    private MangaService mangaService;
+    private transient MangaService mangaService;
 
     @EJB
-    private GenreService genreService;
+    private transient GenreService genreService;
 
     private String title;
     private Long genreId = null;
@@ -71,7 +71,6 @@ public class SearchManga implements Serializable {
     public List<Genre> getListGenres() {
         List<Genre> genres = genreService.findAll();
         genres.sort((g1, g2) -> g1.getName().compareTo(g1.getName()));
-        System.out.println(genres);
         return genres;
     }
 }

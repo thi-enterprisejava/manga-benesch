@@ -1,6 +1,7 @@
 package de.thi.manga.web.model;
 
 import de.thi.manga.domain.Account;
+import de.thi.manga.exception.NotLoggedInException;
 import de.thi.manga.service.AccountService;
 import org.omnifaces.util.Faces;
 
@@ -9,7 +10,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.Serializable;
 
 @Named
@@ -17,10 +20,10 @@ import java.io.Serializable;
 public class AccountBean implements Serializable {
 
     @EJB
-    private AccountService accountService;
+    private transient AccountService accountService;
 
     @Inject
-    private HttpServletRequest httpServletRequest;
+    private transient HttpServletRequest httpServletRequest;
 
     private Account account;
 
@@ -28,7 +31,7 @@ public class AccountBean implements Serializable {
         return account != null;
     }
 
-    public void doLogout() throws Exception {
+    public void doLogout() throws IOException, ServletException {
         Faces.logout();
         Faces.redirect("index.xhtml");
     }
@@ -46,7 +49,7 @@ public class AccountBean implements Serializable {
 
     private void assertLoggedIn() {
         if (!isLoggedIn()) {
-            throw new RuntimeException("Der Benutzer ist nicht eingeloggt.");
+            throw new NotLoggedInException();
         }
     }
 

@@ -5,24 +5,24 @@ import de.thi.manga.domain.Genre;
 import de.thi.manga.service.AccountService;
 import de.thi.manga.service.GenreService;
 import org.apache.log4j.Logger;
-import org.omnifaces.cdi.Startup;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import java.security.NoSuchAlgorithmException;
 
-@Named
+@Singleton
 @Startup
 public class Init {
 
-    private final static Logger logger = Logger.getLogger(Init.class);
+    private static final Logger LOGGER = Logger.getLogger(Init.class);
 
     @EJB
-    private GenreService genreService;
+    private transient GenreService genreService;
 
     @EJB
-    private AccountService userService;
+    private transient AccountService userService;
 
     @PostConstruct
     public void init() {
@@ -31,7 +31,7 @@ public class Init {
     }
 
     public void initGenres() {
-        if (genreService.findAll().size() > 0) {
+        if (!genreService.findAll().isEmpty()) {
             return;
         }
 
@@ -52,19 +52,19 @@ public class Init {
         genreService.add(new Genre("Shoujo"));
         genreService.add(new Genre("Josei"));
 
-        logger.debug("Genres initialized:");
-        logger.debug(genreService.findAll().toString());
+        LOGGER.debug("Genres initialized:");
+        LOGGER.debug(genreService.findAll().toString());
     }
 
     public void initUsers() {
-        if (userService.findAll().size() > 0) {
+        if (!userService.findAll().isEmpty()) {
             return;
         }
 
         try {
             userService.createAccount("daniel", "Daniel", "1234", AccountService.DEFAULT_ROLE);
         } catch (NoSuchAlgorithmException e) {
-            logger.warn("Could not init users", e);
+            LOGGER.warn("Could not init users", e);
         }
     }
 }

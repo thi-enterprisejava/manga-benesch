@@ -13,12 +13,12 @@ import javax.servlet.http.Part;
 @RequestScoped
 public class MangaCoverUploadValidator implements Validator {
 
-    public final static int MAX_FILESIZE_MB = 1;
-    public final static int MAX_FILESIZE = MAX_FILESIZE_MB * 1024 * 1024;
-    public final static String CONTENT_TYPE_REGEX = "^image/.*$";
+    public static final int MAX_FILESIZE_MB = 1;
+    public static final int MAX_FILESIZE = MAX_FILESIZE_MB * 1024 * 1024;
+    public static final String CONTENT_TYPE_REGEX = "^image/.*$";
 
     @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) {
         Part file = (Part) value;
 
         if (file == null) {

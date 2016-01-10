@@ -12,9 +12,9 @@ import javax.inject.Named;
 public class ImageStreamer {
 
     @Inject
-    private MangaService mangaService;
+    private transient MangaService mangaService;
 
-    public byte[] getImageByMangaId(Long id) {
+    public byte[] getCoverByMangaId(Long id) {
         if (id == null) {
             return new byte[0];
         }

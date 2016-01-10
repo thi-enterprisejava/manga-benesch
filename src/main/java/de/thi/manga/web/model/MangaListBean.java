@@ -3,14 +3,15 @@ package de.thi.manga.web.model;
 import de.thi.manga.domain.Manga;
 import de.thi.manga.domain.MangaList;
 import de.thi.manga.service.MangaListService;
-import de.thi.manga.service.MangaService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -18,13 +19,10 @@ import java.util.List;
 public class MangaListBean implements Serializable {
 
     @EJB
-    private MangaListService mangaListService;
-
-    @EJB
-    private MangaService mangaService;
+    private transient MangaListService mangaListService;
 
     @Inject
-    private AccountBean account;
+    private transient AccountBean account;
 
     private MangaList mangaList;
 
@@ -32,12 +30,12 @@ public class MangaListBean implements Serializable {
     public void init() {
         Long accountId = account.getAccountId();
         try {
-            System.out.println("accountId: " + accountId);
             mangaList = mangaListService.findMangaList(accountId);
-        } catch (Exception e) {
-            System.out.println(e.getClass());
+        } catch (EJBException e) {
+            //Keine Mangalist für die AccountId in der Datenbank -> neue anlegen
             mangaList = new MangaList();
             mangaList.setAccountId(accountId);
+            mangaList.setMangas(new ArrayList<>());
             mangaListService.create(mangaList);
         }
     }
@@ -47,20 +45,17 @@ public class MangaListBean implements Serializable {
     }
 
     public void addManga(Manga manga) {
-        System.out.println("manga added called " + manga.getId());
         List<Manga> mangas = getMangas();
         if (!isMangaOnMangaList(manga)) {
             mangas.add(manga);
             mangaList = mangaListService.update(mangaList);
         }
-        System.out.println("manga added " + manga.getId());
     }
 
     public void removeManga(Manga manga) {
         if (getMangas().removeIf(mangaInList -> mangaInList.getId() == manga.getId())) {
             mangaList = mangaListService.update(mangaList);
         }
-        System.out.println("manga removed " + manga.getId());
     }
 
     public boolean isMangaOnMangaList(Manga manga) {

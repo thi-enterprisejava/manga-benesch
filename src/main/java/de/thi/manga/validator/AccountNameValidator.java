@@ -19,14 +19,14 @@ public class AccountNameValidator implements Validator {
     private AccountService accountService;
 
     @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) {
         String accountName = value.toString();
 
         if (!accountService.isAccountNameValid(accountName)) {
             throw new ValidatorException(new FacesMessage("Ungültiger Accountname"));
         }
 
-        if (accountService.isAccountExists(accountName)) {
+        if (accountService.isAccountExists(accountService.transformAccountName(accountName))) {
             throw new ValidatorException(new FacesMessage("Der Account existiert bereits."));
         }
     }

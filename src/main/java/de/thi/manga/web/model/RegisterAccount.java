@@ -21,7 +21,7 @@ public class RegisterAccount implements Serializable {
     private String passwordConfirm;
 
     @EJB
-    private AccountService accountService;
+    private transient AccountService accountService;
 
     public String getAccountName() {
         return accountName;
@@ -55,10 +55,14 @@ public class RegisterAccount implements Serializable {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public String doRegister() throws NoSuchAlgorithmException, ServletException, IOException {
+    public void doRegister() throws NoSuchAlgorithmException, ServletException, IOException {
         accountService.createAccount(accountName, displayName, password);
-        Faces.login(accountName, password);
 
-        return "index.xhtml";
+        System.out.println(accountName);
+        System.out.println(displayName);
+        System.out.println(password);
+        accountService.findAll().forEach(a -> System.out.println(a.getName()));
+        Faces.login(accountName, password);
+        Faces.redirect("index.xhtml");
     }
 }

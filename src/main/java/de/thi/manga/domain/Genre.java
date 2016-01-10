@@ -39,18 +39,4 @@ public class Genre implements Serializable {
         this.name = name;
     }
 
-
-
-    /*
-    Adventure, Action,
-    Cyberpunk,
-    Ecchi,
-    Horror,
-    Magical_Girl, Mecha, Mystery,
-    Slice_Of_Life, Sport,
-
-    // Target Groups:
-    Shounen, Seinen,
-    Shoujo, Josei,
-*/
 }

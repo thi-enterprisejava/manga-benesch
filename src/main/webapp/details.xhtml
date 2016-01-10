@@ -109,8 +109,9 @@
                     </div>
 
                     <div class="pure-u-2-5">
-                        <o:graphicImage styleClass="pure-img"
-                                        value="#{imageStreamer.getImageByMangaId(selectedManga.mangaId)}"
+                        <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
+                                        styleClass="pure-img"
+                                        value="#{imageStreamer.getCoverByMangaId(selectedManga.mangaId)}"
                                         lastModified="#{startup.time}"/>
                     </div>
                 </div>

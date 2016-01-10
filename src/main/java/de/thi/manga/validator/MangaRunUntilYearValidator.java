@@ -15,29 +15,34 @@ import java.util.Calendar;
 public class MangaRunUntilYearValidator implements Validator {
 
     @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) {
         if (value.toString().isEmpty()) {
             return; //ongoing
         }
 
         try {
-            int untilYear = Integer.valueOf(value.toString());
-            uiComponent.getAttributes().entrySet().forEach(System.out::println);
-            UIInput runFromYear = (UIInput) uiComponent.getAttributes().get("runFromYear");
-            int fromYear = Integer.valueOf(runFromYear.getValue().toString());
+            int untilYear = Integer.parseInt(value.toString());
             if (untilYear == 0) {
                 return; //ongoing
             }
-            if (untilYear < fromYear) {
-                throw new ValidatorException(new FacesMessage(
-                        "Das Jahr der letzten Ausgabe darf nicht vor dem Jahr der Erstpublikation sein."));
-            }
-            if (untilYear > Calendar.getInstance().get(Calendar.YEAR)) {
-                throw new ValidatorException(new FacesMessage(
-                        "Das Jahr der letzten Ausgabe darf nicht in der Zukunft liegen."));
-            }
+
+            UIInput runFromYear = (UIInput) uiComponent.getAttributes().get("runFromYear");
+            int fromYear = Integer.parseInt(runFromYear.getValue().toString());
+
+            validateValidYearCombination(untilYear, fromYear);
         } catch (NumberFormatException e) {
             throw new ValidatorException(new FacesMessage("Ungültiges Jahr angegeben."));
+        }
+    }
+
+    private void validateValidYearCombination(int untilYear, int fromYear) {
+        if (untilYear < fromYear) {
+            throw new ValidatorException(new FacesMessage(
+                    "Das Jahr der letzten Ausgabe darf nicht vor dem Jahr der Erstpublikation sein."));
+        }
+        if (untilYear > Calendar.getInstance().get(Calendar.YEAR)) {
+            throw new ValidatorException(new FacesMessage(
+                    "Das Jahr der letzten Ausgabe darf nicht in der Zukunft liegen."));
         }
     }
 }

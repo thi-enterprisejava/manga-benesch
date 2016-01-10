@@ -15,7 +15,7 @@
         <div class="content">
             <h1>#{msg['add.header']}</h1>
 
-            <h:form styleClass="pure-form pure-form-aligned" enctype="multipart/form-data">
+            <h:form styleClass="pure-form pure-form-aligned" enctype="multipart/form-data" prependId="false">
 
                 <div class="pure-control-group">
                     <h:outputLabel for="title" value="#{msg['add.title']}"/>
@@ -74,7 +74,7 @@
                 <div class="pure-control-group multiline-control-group">
                     <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
                     <h:panelGroup id="runUntilYear">
-                        <h:inputText value="#{selectedManga.manga.runFromYear}">
+                        <h:inputText value="#{selectedManga.manga.runUntilYear}">
                             <f:attribute name="runFromYear" value="#{runFromYear}"/>
                             <f:validator binding="#{mangaRunUntilYearValidator}"/>
                         </h:inputText>
@@ -116,7 +116,7 @@
 
                 <div class="pure-controls">
                     <h:commandButton action="#{selectedManga.doAdd}" value="#{msg['add.save']}"
-                                     styleClass="pure-button"/>
+                                     id="addMangaButton" styleClass="pure-button"/>
                 </div>
             </h:form>
 

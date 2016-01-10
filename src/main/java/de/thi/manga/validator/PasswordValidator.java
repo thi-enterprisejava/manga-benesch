@@ -19,7 +19,7 @@ public class PasswordValidator implements Validator {
     private AccountService accountService;
 
     @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) {
         String password = value.toString();
 
         if (!accountService.isPasswordValid(password)) {

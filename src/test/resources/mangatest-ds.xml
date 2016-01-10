@@ -1,0 +1,15 @@
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+        >
+    <!-- The datasource is bound into JNDI at this location. We reference this in META-INF/persistence.xml -->
+    <datasource jndi-name="java:/MangaTestDS"
+                enabled="true"
+                use-java-context="true"
+                pool-name="MangaDsPool">
+        <connection-url>jdbc:h2:mem:cocktail;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+        <driver>h2</driver>
+        <security>
+            <user-name>sa</user-name>
+            <password>sa</password>
+        </security>
+    </datasource>
+</datasources>

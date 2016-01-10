@@ -24,7 +24,7 @@
             <h1>Suche</h1>
 
             <div>
-                <h:form styleClass="pure-form pure-form-aligned">
+                <h:form styleClass="pure-form pure-form-aligned" prependId="false">
                     <fieldset>
                         <h:inputText id="title" value="#{searchManga.title}">
                             <f:passThroughAttribute name="placeholder" value="Titel"/>
@@ -37,7 +37,7 @@
                         </h:selectOneMenu>
 
                         <h:commandButton action="#{searchManga.doSearch}" value="Suchen"
-                                         styleClass="pure-button"/>
+                                         id="searchButton" styleClass="pure-button"/>
                     </fieldset>
                 </h:form>
             </div>
@@ -58,7 +58,7 @@
 
                     <tbody>
                 <ui:repeat value="#{searchManga.results}" var="manga">
-                    <tr>
+                    <tr class="searchResult">
                         <td><a href="details.xhtml?manga=#{manga.id}">#{manga.title}</a></td>
                         <td>#{manga.author}</td>
                         <td>#{manga.publisher}</td>
