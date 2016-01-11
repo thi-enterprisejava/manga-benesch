@@ -2,6 +2,7 @@ package de.thi.manga.service;
 
 import de.thi.manga.domain.Genre;
 import de.thi.manga.domain.Manga;
+import de.thi.manga.domain.MangaList;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.Cleanup;
@@ -11,7 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -23,14 +26,19 @@ public class MangaServiceIntegrationTest {
     MangaService mangaService;
 
     @EJB
+    MangaListService mangaListService;
+
+    @EJB
     GenreService genreService;
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .addClass(MangaService.class)
+                .addClass(MangaListService.class)
                 .addClass(GenreService.class)
                 .addClass(Manga.class)
+                .addClass(MangaList.class)
                 .addClass(Genre.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("mangatest-ds.xml");
@@ -100,7 +108,7 @@ public class MangaServiceIntegrationTest {
         genreService.add(genre2);
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        manga1.setGenres(Arrays.asList(genre2));
+        manga1.setGenres(Collections.singletonList(genre2));
         mangaService.add(manga1);
 
         List<Manga> mangas = mangaService.findByGenreId(genre2.getId());
@@ -123,7 +131,7 @@ public class MangaServiceIntegrationTest {
         genreService.add(genre2);
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        manga1.setGenres(Arrays.asList(genre2));
+        manga1.setGenres(Collections.singletonList(genre2));
         mangaService.add(manga1);
         Manga manga2 = new Manga();
         manga2.setTitle("manga2");
@@ -147,14 +155,35 @@ public class MangaServiceIntegrationTest {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
         mangaService.add(manga1);
-
         Manga persistedManga = mangaService.findById(manga1.getId());
         persistedManga.setTitle("newTitle");
-        mangaService.update(persistedManga);
-        Manga updatedManga = mangaService.findById(manga1.getId());
 
+        mangaService.update(persistedManga);
+
+        Manga updatedManga = mangaService.findById(manga1.getId());
         assertNotNull(updatedManga);
         assertEquals("newTitle", updatedManga.getTitle());
+    }
+
+    @Test
+    @Cleanup
+    public void testDeleteManga() throws Exception {
+        Manga manga1 = new Manga();
+        manga1.setTitle("manga1");
+        mangaService.add(manga1);
+        Manga persistedManga = mangaService.findById(manga1.getId());
+        assertNotNull(persistedManga);
+        MangaList mangaList = new MangaList();
+        mangaList.setAccountId(1L);
+        mangaList.setMangas(new ArrayList<>(Collections.singletonList(persistedManga)));
+        mangaListService.create(mangaList);
+
+        mangaService.delete(persistedManga);
+
+        Manga updatedManga = mangaService.findById(manga1.getId());
+        assertNull(updatedManga);
+        MangaList persistedMangaList = mangaListService.findMangaList(1L);
+        assertTrue(persistedMangaList.getMangas().isEmpty());
     }
 
 }

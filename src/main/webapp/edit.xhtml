@@ -44,8 +44,9 @@
                         <br/>
                         (max. #{MangaCoverUploadValidator.MAX_FILESIZE_MB}MB)
                         <br/>
-                        <o:graphicImage styleClass="pure-img edit-cover-image"
-                                        value="#{imageStreamer.coverByMangaId(selectedManga.mangaId)}"
+                        <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
+                                        styleClass="pure-img edit-cover-image"
+                                        value="#{imageStreamer.getCoverByMangaId(selectedManga.mangaId)}"
                                         lastModified="#{startup.time}"/>
                     </h:panelGroup>
                     <h:message id="imageFileMessage" for="imageFile" styleClass="validation-message-box"/>
@@ -84,7 +85,7 @@
                 <div class="pure-control-group multiline-control-group">
                     <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
                     <h:panelGroup id="runUntilYear">
-                        <h:inputText value="#{selectedManga.manga.runFromYear}">
+                        <h:inputText value="#{selectedManga.manga.runUntilYear}">
                             <f:attribute name="runFromYear" value="#{runFromYear}"/>
                             <f:validator binding="#{mangaRunUntilYearValidator}"/>
                         </h:inputText>

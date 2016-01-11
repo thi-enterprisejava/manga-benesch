@@ -1,6 +1,7 @@
 package de.thi.manga.service;
 
 import de.thi.manga.domain.Manga;
+import de.thi.manga.domain.MangaList;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,6 +21,24 @@ public class MangaService {
 
     public Manga update(Manga manga) {
         return entityManager.merge(manga);
+    }
+
+    /**
+     * Lösche den manga aus allen {@link MangaList}en und anschließend aus der Datenbank
+     *
+     * @param manga der Manga der gelöscht werden soll
+     */
+    public void delete(Manga manga) {
+        Manga managedManga = entityManager.contains(manga) ? manga : entityManager.merge(manga);
+
+        TypedQuery<MangaList> query = entityManager.createQuery("SELECT ml FROM MangaList as ml WHERE :mangaId IN (SELECT manga.id FROM ml.mangas as manga)", MangaList.class);
+        query.setParameter("mangaId", managedManga.getId());
+        List<MangaList> resultList = query.getResultList();
+        for (MangaList mangaList : resultList) {
+            mangaList.getMangas().remove(managedManga);
+            entityManager.merge(mangaList);
+        }
+        entityManager.remove(managedManga);
     }
 
     public List<Manga> findAll() {

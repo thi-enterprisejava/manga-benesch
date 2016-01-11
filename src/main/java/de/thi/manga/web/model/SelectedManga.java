@@ -14,7 +14,6 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,6 +78,11 @@ public class SelectedManga implements Serializable {
         return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
     }
 
+    public String doDelete() throws IOException {
+        mangaService.delete(manga);
+        return "index.xhtml?faces-redirect=true";
+    }
+
     private void updateSelectedManga() throws IOException {
         manga.setGenres(convertToGenreList(selectedGenreIds));
 
@@ -115,9 +119,8 @@ public class SelectedManga implements Serializable {
     private List<Genre> convertToGenreList(List<String> genreIds) {
         List<Genre> genresResult = new ArrayList<>(genreIds.size());
         for (String genreId : genreIds) {
-            Long id = Long.valueOf(genreId);
-            for (Iterator<Genre> iterator = this.getListGenres().iterator(); iterator.hasNext(); ) {
-                Genre next = iterator.next();
+            long id = Long.valueOf(genreId);
+            for (Genre next : this.getListGenres()) {
                 if (id == next.getId()) {
                     genresResult.add(next);
                     break;

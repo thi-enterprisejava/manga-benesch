@@ -22,7 +22,7 @@ h1 {
 .navigation {
     position: static;
     background-color: rgba(0, 0, 0, 1.0);
-    top: 0px;
+    top: 0;
 }
 
 .content {
@@ -40,7 +40,7 @@ h1 {
 .splash {
     position: absolute;
     width: 500px;
-    margin: 0px 0 0 -150px;
+    margin: 0 0 0 -150px;
     top: 50%;
     left: 50%;
 }
@@ -98,8 +98,8 @@ h1 {
 }
 
 .multiline-control-group.tablelist ul {
-    padding-left: 0px;
-    -webkit-margin-before: 0px;
+    padding-left: 0;
+    -webkit-margin-before: 0;
 }
 
 .multiline-control-group * {
@@ -143,7 +143,7 @@ h1 {
     background-image: url(../images/mangalist-remove.png);
 }
 
-.manga-edit {
-    background-image: url(../images/edit.png);
+.manga-delete {
+    background-image: url(../images/delete.png);
 }
 

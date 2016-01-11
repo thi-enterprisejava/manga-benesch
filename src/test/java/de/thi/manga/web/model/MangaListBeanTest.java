@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ejb.EJBException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class MangaListBeanTest {
     public void testAddManga() throws Exception {
         Manga manga = new Manga();
         manga.setId(100L);
-        when(mangaListService.findMangaList(any())).thenThrow(new RuntimeException());
+        when(mangaListService.findMangaList(any())).thenThrow(new EJBException());
         when(mangaListService.update(any())).thenAnswer(invocation -> invocation.getArguments()[0]);
 
         TestUtils.postConstruct(mangaListBean);
@@ -67,7 +68,7 @@ public class MangaListBeanTest {
         manga1.setId(100L);
         Manga manga2 = new Manga();
         manga2.setId(100L);
-        when(mangaListService.findMangaList(any())).thenThrow(new RuntimeException());
+        when(mangaListService.findMangaList(any())).thenThrow(new EJBException());
         when(mangaListService.update(any())).thenAnswer(invocation -> invocation.getArguments()[0]);
 
         TestUtils.postConstruct(mangaListBean);

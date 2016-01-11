@@ -19,6 +19,7 @@
         <web-resource-collection>
             <web-resource-name>Authorized Users</web-resource-name>
             <url-pattern>/add.xhtml</url-pattern>
+            <url-pattern>/edit.xhtml</url-pattern>
             <url-pattern>/mangalist.xhtml</url-pattern>
             <url-pattern>/api/*</url-pattern>
         </web-resource-collection>

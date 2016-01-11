@@ -45,6 +45,13 @@
                                      alt="Manga bearbeiten"/>
                             </a>
                         </h:form>
+                        <h:form styleClass="inline-form">
+                            <h:commandButton
+                                    styleClass="pure-img mangalist-button manga-delete"
+                                    alt="Zu Meine Mangas hinzufügen" value=""
+                                    action="#{selectedManga.doDelete}"
+                                    />
+                        </h:form>
                     </h:panelGroup>
                 </h1>
 
@@ -76,7 +83,7 @@
                             <div class="pure-control-group">
                                 <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
                                 <h:outputText id="runUntilYear"
-                                              value="#{selectedManga.manga.runFromYear}">
+                                              value="#{selectedManga.manga.runUntilYear}">
                                 </h:outputText>
                             </div>
 

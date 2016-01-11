@@ -58,10 +58,6 @@ public class RegisterAccount implements Serializable {
     public void doRegister() throws NoSuchAlgorithmException, ServletException, IOException {
         accountService.createAccount(accountName, displayName, password);
 
-        System.out.println(accountName);
-        System.out.println(displayName);
-        System.out.println(password);
-        accountService.findAll().forEach(a -> System.out.println(a.getName()));
         Faces.login(accountName, password);
         Faces.redirect("index.xhtml");
     }
