@@ -22,7 +22,7 @@
             <div class="content">
 
                 <h1>
-                    #{selectedManga.manga.title}
+                    <span id="title">#{selectedManga.manga.title}</span>
                     <h:panelGroup rendered="#{accountBean.loggedIn}" id="add-manga-to-mangalist"
                                   styleClass="float-right">
                         <h:form styleClass="inline-form">
@@ -99,7 +99,7 @@
                                 <ul>
                                     <ui:repeat id="genres" value="#{selectedManga.manga.genres}" var="genre">
                                         <li>
-                                            <a href="search.xhtml?genreId=#{genre.id}">#{genre.name}</a>
+                                            <a href="search.xhtml?genreId=#{genre.id}" class="genre">#{genre.name}</a>
                                         </li>
                                     </ui:repeat>
                                 </ul>
@@ -117,7 +117,7 @@
 
                     <div class="pure-u-2-5">
                         <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
-                                        styleClass="pure-img"
+                                        id="cover" styleClass="pure-img"
                                         value="#{imageStreamer.getCoverByMangaId(selectedManga.mangaId)}"
                                         lastModified="#{startup.time}"/>
                     </div>

@@ -64,8 +64,8 @@ public class Manga implements Serializable {
         return runFromYear;
     }
 
-    public void setRunFromYear(int year) {
-        this.runFromYear = year;
+    public void setRunFromYear(int runFromyear) {
+        this.runFromYear = runFromyear;
     }
 
     public int getRunUntilYear() {

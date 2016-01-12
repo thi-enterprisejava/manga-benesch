@@ -1,7 +1,8 @@
 package de.thi.manga;
 
-import de.thi.manga.selenium.SearchMangaIntegrationTest;
 import de.thi.manga.service.*;
+import de.thi.manga.ui.MangaUITest;
+import de.thi.manga.ui.SearchUITest;
 import de.thi.manga.validator.AccountNameValidatorTest;
 import de.thi.manga.validator.MangaCoverUploadValidatorTest;
 import de.thi.manga.validator.MangaRunUntilYearValidatorTest;
@@ -30,7 +31,8 @@ import org.junit.runners.Suite;
         SelectMangaTest.class,
 
         //Oberflächentests
-        SearchMangaIntegrationTest.class,
+        SearchUITest.class,
+        MangaUITest.class,
 })
 public class AllTests {
 

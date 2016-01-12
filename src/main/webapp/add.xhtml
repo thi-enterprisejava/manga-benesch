@@ -74,7 +74,7 @@
                 <div class="pure-control-group multiline-control-group">
                     <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
                     <h:panelGroup id="runUntilYear">
-                        <h:inputText value="#{selectedManga.manga.runUntilYear}">
+                        <h:inputText id="runUntilYearInput" value="#{selectedManga.manga.runUntilYear}">
                             <f:attribute name="runFromYear" value="#{runFromYear}"/>
                             <f:validator binding="#{mangaRunUntilYearValidator}"/>
                         </h:inputText>

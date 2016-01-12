@@ -59,7 +59,7 @@
                     <tbody>
                 <ui:repeat value="#{searchManga.results}" var="manga">
                     <tr class="searchResult">
-                        <td><a href="details.xhtml?manga=#{manga.id}">#{manga.title}</a></td>
+                        <td><a href="details.xhtml?manga=#{manga.id}" class="mangaDetails">#{manga.title}</a></td>
                         <td>#{manga.author}</td>
                         <td>#{manga.publisher}</td>
                         <td>
