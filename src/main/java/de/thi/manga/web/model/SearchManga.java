@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 @Named
@@ -23,6 +24,7 @@ public class SearchManga implements Serializable {
 
     private String title;
     private Long genreId = null;
+    private boolean redirected;
 
     private List<Manga> results;
 
@@ -42,12 +44,22 @@ public class SearchManga implements Serializable {
         this.genreId = genreId;
     }
 
+    public boolean isRedirected() {
+        return redirected;
+    }
+
+    public void setRedirected(boolean redirected) {
+        this.redirected = redirected;
+    }
+
     public List<Manga> getResults() {
         return results;
     }
 
     public void initResults() {
-        if (title == null && genreId == null) {
+        if (redirected) {
+            results = Collections.<Manga>emptyList();
+        } else if (title == null && genreId == null) {
             results = mangaService.findAll();
         } else if (title == null) {
             results = mangaService.findByGenreId(genreId);

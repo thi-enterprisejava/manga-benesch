@@ -13,9 +13,9 @@
 
         <h:form styleClass="splash pure-form" prependId="false">
             <h:inputText value="#{searchManga.title}" id="searchTitle">
-                <f:passThroughAttribute name="placeholder" value="#{msg['index.search.placeholder']}" />
+                <f:passThroughAttribute name="placeholder" value="#{msg['page.index.search.placeholder']}"/>
             </h:inputText>
-            <h:commandButton action="#{searchManga.doSearch}" value="#{msg['index.search.button']}"
+            <h:commandButton action="#{searchManga.doSearch}" value="#{msg['page.index.search.button']}"
                              id="searchButton" styleClass="pure-button"/>
         </h:form>
 

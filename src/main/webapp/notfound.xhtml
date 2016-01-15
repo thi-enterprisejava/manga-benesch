@@ -5,18 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
-<head></head>
-
 <h:body>
 
     <ui:composition template="/template.xhtml">
         <ui:define name="content">
 
-            <div class="content">
+            <div class="content notfound">
 
-                <h1>Ups</h1>
+                <h1>#{msg['page.notfound.header']}</h1>
 
-                <div>Dieser Manga konnte nicht gefunden werden.</div>
+                <div>#{msg['page.notfound.text']}</div>
 
             </div>
 

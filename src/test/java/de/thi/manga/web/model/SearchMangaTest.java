@@ -81,4 +81,15 @@ public class SearchMangaTest {
 
         verify(mangaService, times(1)).findByTitleAndGenreId("title", 1L);
     }
+
+    @Test
+    public void testResultsAreEmptyOnRedirect() throws Exception {
+        searchManga.setRedirected(true);
+        searchManga.setGenreId(1L);
+
+        searchManga.initResults();
+
+        assertTrue(searchManga.getResults().isEmpty());
+        verifyZeroInteractions(mangaService);
+    }
 }

@@ -8,29 +8,33 @@
       xml:lang="en" lang="en">
 <h:head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>#{msg['common.title']}</title>
+    <title>#{msg['page.template.title']}</title>
     <link rel="stylesheet" href="style/style.css"/>
 </h:head>
 <h:body>
 
     <div class="pure-menu pure-menu-horizontal navigation">
-        <a class="pure-menu-heading">#{msg['navigation.title']}</a>
-        <a class="pure-menu-link pure-menu-link-left" href="index.xhtml">#{msg['navigation.home']}</a>
+        <a class="pure-menu-heading">#{msg['page.template.navigation.title']}</a>
+        <a class="pure-menu-link pure-menu-link-left" href="index.xhtml">#{msg['page.template.navigation.home']}</a>
+
+        <a class="pure-menu-link pure-menu-link-left"
+           href="search.xhtml?redirected=true">#{msg['page.template.navigation.search']}</a>
 
         <ui:fragment rendered="#{accountBean.loggedIn}">
-            <a class="pure-menu-link pure-menu-link-left" href="mangalist.xhtml">Meine Mangas</a>
+            <a class="pure-menu-link pure-menu-link-left"
+               href="mangalist.xhtml">#{msg['page.template.navigation.mangalist']}</a>
         </ui:fragment>
 
         <ul class="pure-menu-list pure-menu-list-right">
             <ui:fragment rendered="#{not accountBean.loggedIn}">
                 <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="mangalist.xhtml">Login</a>
+                    <a class="pure-menu-link" href="mangalist.xhtml">#{msg['page.template.navigation.login']}</a>
                 </li>
             </ui:fragment>
 
             <ui:fragment rendered="#{accountBean.loggedIn}">
                 <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="add.xhtml">#{msg['navigation.addmanga']}</a>
+                    <a class="pure-menu-link" href="add.xhtml">#{msg['page.template.navigation.add']}</a>
                 </li>
 
                 <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
@@ -38,7 +42,8 @@
                     <ul class="pure-menu-children">
                         <li class="pure-menu-item">
                             <h:form rendered="#{accountBean.loggedIn}">
-                                <h:commandLink value="Logout" action="#{accountBean.doLogout}"
+                                <h:commandLink value="#{msg['page.template.navigation.logout']}"
+                                               action="#{accountBean.doLogout}"
                                                styleClass="pure-menu-link"/>
                             </h:form>
                         </li>

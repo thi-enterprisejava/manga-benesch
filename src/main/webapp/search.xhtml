@@ -7,10 +7,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 <head>
-    <title>Ergebnisse</title>
     <f:metadata>
         <f:viewParam name="title" value="#{searchManga.title}"/>
         <f:viewParam name="genreId" value="#{searchManga.genreId}"/>
+        <f:viewParam name="redirected" value="#{searchManga.redirected}"/>
         <f:viewAction action="#{searchManga.initResults}"/>
     </f:metadata>
 </head>
@@ -21,22 +21,22 @@
 
         <div class="content">
 
-            <h1>Suche</h1>
+            <h1>#{msg['page.search.header']}</h1>
 
             <div>
                 <h:form styleClass="pure-form pure-form-aligned" prependId="false">
                     <fieldset>
                         <h:inputText id="title" value="#{searchManga.title}">
-                            <f:passThroughAttribute name="placeholder" value="Titel"/>
+                            <f:passThroughAttribute name="placeholder" value="#{msg['page.search.placeholder.title']}"/>
                         </h:inputText>
 
                         <h:selectOneMenu id="genre" value="#{searchManga.genreId}">
-                            <f:selectItem itemValue="#{null}" itemLabel="--Genre--"/>
+                            <f:selectItem itemValue="#{null}" itemLabel="#{msg['page.search.placeholder.genre']}"/>
                             <f:selectItems value="#{searchManga.listGenres}" var="genre"
                                            itemValue="#{genre.id}" itemLabel="#{genre.name}"/>
                         </h:selectOneMenu>
 
-                        <h:commandButton action="#{searchManga.doSearch}" value="Suchen"
+                        <h:commandButton action="#{searchManga.doSearch}" value="#{msg['page.search.searchButton']}"
                                          id="searchButton" styleClass="pure-button"/>
                     </fieldset>
                 </h:form>
@@ -46,13 +46,13 @@
                 <table class="pure-table pure-table-striped">
                     <thead>
                     <tr>
-                        <th>Manga</th>
-                        <th>Author</th>
-                        <th>Publisher</th>
-                        <th>Genres</th>
-                        <th>Von</th>
-                        <th>Bis</th>
-                        <th>Volumes</th>
+                        <th>#{msg['manga.title']}</th>
+                        <th>#{msg['manga.author']}</th>
+                        <th>#{msg['manga.publisher']}</th>
+                        <th>#{msg['manga.genres']}</th>
+                        <th>#{msg['manga.runFromYear.short']}</th>
+                        <th>#{msg['manga.runUntilYear.short']}</th>
+                        <th>#{msg['manga.volumes']}</th>
                     </tr>
                     </thead>
 
@@ -68,7 +68,7 @@
                             </ui:repeat>
                         </td>
                         <td>#{manga.runFromYear}</td>
-                        <td>#{manga.runUntilYear == 0?"ongoing":manga.runUntilYear}</td>
+                        <td>#{manga.runUntilYear == 0?msg['manga.ongoing']:manga.runUntilYear}</td>
                         <td>#{manga.volumes}</td>
                     </tr>
                 </ui:repeat>
@@ -76,8 +76,8 @@
                 </table>
             </ui:fragment>
 
-            <ui:fragment rendered="#{empty searchManga.results}">
-                Die Suche lieferte keine Ergebnisse.
+            <ui:fragment rendered="#{not searchManga.redirected and empty searchManga.results}">
+                #{msg['page.search.noresults']}
             </ui:fragment>
         </div>
 

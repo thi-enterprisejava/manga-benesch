@@ -16,8 +16,11 @@ import java.util.Locale;
 @Stateless
 public class AccountService {
 
-    public static final int MAX_ACCOUNT_NAME_LENGTH = 30;
+    /**
+     * Verwendet in register.xhtml
+     */
     public static final int MAX_ACCOUNT_DISPLAYNAME_LENGTH = 30;
+    public static final int MAX_ACCOUNT_NAME_LENGTH = 30;
     public static final int MIN_PASSWORD_LENGTH = 4;
     public static final int MAX_PASSWORD_LENGTH = 50;
 

@@ -6,7 +6,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 <h:head>
-    <title>#{selectedManga.manga.title}</title>
 </h:head>
 
 <h:body>
@@ -15,47 +14,56 @@
         <ui:define name="content">
 
             <div class="content">
-                <h1>Meine Mangas</h1>
+                <h1>#{msg['page.mangalist.header']}</h1>
 
-                <table class="pure-table pure-table-striped">
-                    <thead>
-                    <tr>
-                        <th>Manga</th>
-                        <th>Author</th>
-                        <th>Publisher</th>
-                        <th>Genres</th>
-                        <th>Von</th>
-                        <th>Bis</th>
-                        <th>Volumes</th>
-                        <th>Entfernen</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <ui:repeat value="#{mangaListBean.mangas}" var="manga">
-                        <tr class="mangalistEntry">
-                            <td><a href="details.xhtml?manga=#{manga.id}" class="mangaDetails">#{manga.title}</a></td>
-                            <td>#{manga.author}</td>
-                            <td>#{manga.publisher}</td>
-                            <td>
-                                <ui:repeat value="#{manga.genres}" var="genre" varStatus="loop">
-                                    <a href="search.xhtml?genreId=#{genre.id}">#{genre.name}</a>#{!loop.last ? ', ' : ''}
-                                </ui:repeat>
-                            </td>
-                            <td>#{manga.runFromYear}</td>
-                            <td>#{manga.runUntilYear == 0?"ongoing":manga.runUntilYear}</td>
-                            <td>#{manga.volumes}</td>
-                            <td>
-                                <h:form styleClass="inline-form">
-                                    <h:commandButton styleClass="pure-img mangalist-list-button mangalist-remove"
-                                                     alt="Zu Meine Mangas hinzufügen" value=""
-                                                     action="#{mangaListBean.removeManga(manga)}"/>
-                                </h:form>
-                            </td>
+                <h:outputText value="Blubb" rendered="#{empty mangaListBean.mangas}"/>
+                <h:panelGroup rendered="#{not empty mangaListBean.mangas}">
+                    <table class="pure-table pure-table-striped">
+                        <thead>
+                        <tr>
+                            <th>#{msg['manga.title']}</th>
+                            <th>#{msg['manga.author']}</th>
+                            <th>#{msg['manga.publisher']}</th>
+                            <th>#{msg['manga.genres']}</th>
+                            <th>#{msg['manga.runFromYear.short']}</th>
+                            <th>#{msg['manga.runUntilYear.short']}</th>
+                            <th>#{msg['manga.volumes']}</th>
+                            <th>#{msg['page.mangalist.removeFromList']}</th>
                         </tr>
-                    </ui:repeat>
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                        <ui:repeat value="#{mangaListBean.mangas}" var="manga">
+                            <tr class="mangalistEntry">
+                                <td><a href="details.xhtml?manga=#{manga.id}" class="mangaDetails">#{manga.title}</a>
+                                </td>
+                                <td>#{manga.author}</td>
+                                <td>#{manga.publisher}</td>
+                                <td>
+                                    <ui:repeat value="#{manga.genres}" var="genre" varStatus="loop">
+                                        <a href="search.xhtml?genreId=#{genre.id}">#{genre.name}</a>#{!loop.last ? ', ' : ''}
+                                    </ui:repeat>
+                                </td>
+                                <td>#{manga.runFromYear}</td>
+                                <td>#{manga.runUntilYear == 0?msg['manga.ongoing']:manga.runUntilYear}</td>
+                                <td>#{manga.volumes}</td>
+                                <td>
+                                    <h:form styleClass="inline-form">
+                                        <h:commandButton styleClass="pure-img mangalist-list-button mangalist-remove"
+                                                         alt="#{msg['page.mangalist.removeFromMangaList.alt']}" value=""
+                                                         action="#{mangaListBean.removeManga(manga)}"/>
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{mangaListBean.mangas eq null}">
+                    <br/>
+                    #{msg['page.mangalist.empty']}
+                </h:panelGroup>
 
             </div>
 

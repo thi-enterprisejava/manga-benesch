@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,6 +98,10 @@ public class SelectedManga implements Serializable {
             genres.sort((g1, g2) -> g1.getName().compareTo(g1.getName()));
         }
         return genres;
+    }
+
+    public int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
 
     /**

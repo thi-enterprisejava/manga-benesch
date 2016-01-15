@@ -7,7 +7,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:o="http://omnifaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
-    <title>#{selectedManga.manga.title}</title>
     <f:metadata>
         <f:viewParam name="manga" value="#{selectedManga.mangaId}"/>
         <f:viewAction action="#{selectedManga.init}"/>
@@ -28,13 +27,13 @@
                         <h:form styleClass="inline-form">
                             <h:commandButton rendered="#{not mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
                                              styleClass="pure-img mangalist-button mangalist-add"
-                                             alt="Zu Meine Mangas hinzufügen" value="">
+                                             alt="#{msg['page.details.addToMangaList.alt']}" value="">
                                 <f:ajax listener="#{mangaListBean.addManga(selectedManga.manga)}"
                                         render="add-manga-to-mangalist"/>
                             </h:commandButton>
                             <h:commandButton rendered="#{mangaListBean.isMangaOnMangaList(selectedManga.manga)}"
                                              styleClass="pure-img mangalist-button mangalist-remove"
-                                             alt="Von Meine Mangas entfernen" value="">
+                                             alt="#{msg['page.details.removeFromMangaList.alt']}" value="">
                                 <f:ajax listener="#{mangaListBean.removeManga(selectedManga.manga)}"
                                         render="add-manga-to-mangalist"/>
                             </h:commandButton>
@@ -42,13 +41,13 @@
                         <h:form styleClass="inline-form">
                             <a href="edit.xhtml?manga=#{selectedManga.mangaId}">
                                 <img class="pure-img control-button" src="images/edit.png"
-                                     alt="Manga bearbeiten"/>
+                                     alt="#{msg['page.details.editManga.alt']}"/>
                             </a>
                         </h:form>
                         <h:form styleClass="inline-form">
                             <h:commandButton
                                     styleClass="pure-img mangalist-button manga-delete"
-                                    alt="Zu Meine Mangas hinzufügen" value=""
+                                    alt="#{msg['page.details.deleteManga.alt']}" value=""
                                     action="#{selectedManga.doDelete}"
                                     />
                         </h:form>
@@ -60,42 +59,42 @@
 
                         <div class="pure-form-aligned">
                             <div class="pure-control-group">
-                                <h:outputLabel for="author" value="Autor"/>
+                                <h:outputLabel for="author" value="#{msg['manga.author']}"/>
                                 <h:outputText id="author"
                                               value="#{selectedManga.manga.author}">
                                 </h:outputText>
                             </div>
 
                             <div class="pure-control-group">
-                                <h:outputLabel for="publisher" value="Verlag"/>
+                                <h:outputLabel for="publisher" value="#{msg['manga.publisher']}"/>
                                 <h:outputText id="publisher"
                                               value="#{selectedManga.manga.publisher}">
                                 </h:outputText>
                             </div>
 
                             <div class="pure-control-group">
-                                <h:outputLabel for="runFromYear" value="Jahr der Erstpublikation"/>
+                                <h:outputLabel for="runFromYear" value="#{msg['manga.runFromYear']}"/>
                                 <h:outputText id="runFromYear"
                                               value="#{selectedManga.manga.runFromYear}">
                                 </h:outputText>
                             </div>
 
                             <div class="pure-control-group">
-                                <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
+                                <h:outputLabel for="runUntilYear" value="#{msg['manga.runUntilYear']}"/>
                                 <h:outputText id="runUntilYear"
                                               value="#{selectedManga.manga.runUntilYear}">
                                 </h:outputText>
                             </div>
 
                             <div class="pure-control-group">
-                                <h:outputLabel for="volumes" value="Ausgaben"/>
+                                <h:outputLabel for="volumes" value="#{msg['manga.volumes']}"/>
                                 <h:outputText id="volumes"
                                               value="#{selectedManga.manga.volumes}">
                                 </h:outputText>
                             </div>
 
                             <div class="pure-control-group multiline-control-group tablelist">
-                                <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
+                                <h:outputLabel for="genres" value="#{msg['manga.genres']}"/>
                                 <ul>
                                     <ui:repeat id="genres" value="#{selectedManga.manga.genres}" var="genre">
                                         <li>
@@ -106,7 +105,7 @@
                             </div>
 
                             <div class="pure-control-group multiline-control-group">
-                                <h:outputLabel for="description" value="Beschreibung"/>
+                                <h:outputLabel for="description" value="#{msg['manga.description']}"/>
 
                                 <div id="description">
                                     <pre><code id="">#{selectedManga.manga.description}</code></pre>

@@ -19,22 +19,22 @@
 
         <div class="content">
 
-            <h1>Bearbeiten</h1>
+            <h1>#{msg['page.edit.header']}</h1>
 
             <h:form styleClass="pure-form pure-form-aligned" enctype="multipart/form-data" prependId="false">
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="title" value="#{msg['add.title']}"/>
+                    <h:outputLabel for="title" value="#{msg['manga.title']}"/>
                     <h:inputText id="title"
                                  value="#{selectedManga.manga.title}"
-                                 validatorMessage="#{msg['add.title.validationMessage']}">
+                                 validatorMessage="#{msg['page.add-edit.title.validationMessage']}">
                         <f:validateLength minimum="3" maximum="50"/>
                     </h:inputText>
                 </div>
 
                 <div class="pure-control-group multiline-control-group">
                     <o:importConstants type="de.thi.manga.validator.MangaCoverUploadValidator"/>
-                    <h:outputLabel for="fileUpload" value="Cover"/>
+                    <h:outputLabel for="fileUpload" value="#{msg['manga.cover']}"/>
                     <h:panelGroup id="fileUpload">
                         <h:inputFile id="imageFile" value="#{selectedManga.imageFile}">
                             <f:attribute name="maxSize" value="#{MangaCoverUploadValidator.MAX_FILESIZE}"/>
@@ -42,7 +42,9 @@
                             <f:validator binding="#{mangaCoverUploadValidator}"/>
                         </h:inputFile>
                         <br/>
-                        (max. #{MangaCoverUploadValidator.MAX_FILESIZE_MB}MB)
+                        <h:outputFormat value="#{msg['page.add-edit.over.maxSize']}">
+                            <f:param value="#{MangaCoverUploadValidator.MAX_FILESIZE_MB_STRING}"/>
+                        </h:outputFormat>
                         <br/>
                         <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
                                         styleClass="pure-img edit-cover-image"
@@ -53,60 +55,60 @@
                 </div>
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="author" value="#{msg['add.author']}"/>
+                    <h:outputLabel for="author" value="#{msg['manga.author']}"/>
                     <h:inputText id="author"
                                  value="#{selectedManga.manga.author}"
-                                 validatorMessage="Der Autor darf maximal 50 Zeichen lang sein.">
+                                 validatorMessage="#{msg['page.add-edit.author.validationMessage']}">
                         <f:validateLength maximum="50"/>
                     </h:inputText>
                     <h:message for="author" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="publisher" value="Verlag"/>
+                    <h:outputLabel for="publisher" value="#{msg['manga.publisher']}"/>
                     <h:inputText id="publisher"
                                  value="#{selectedManga.manga.publisher}"
-                                 validatorMessage="Der Verlag darf maximal 50 Zeichen lang sein.">
+                                 validatorMessage="#{msg['page.add-edit.publisher.validationMessage']}">
                         <f:validateLength maximum="50"/>
                     </h:inputText>
                     <h:message for="publisher" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="runFromYear" value="Jahr der Erstpublikation"/>
+                    <h:outputLabel for="runFromYear" value="#{msg['manga.runFromYear']}"/>
                     <h:inputText id="runFromYear" binding="#{runFromYear}"
                                  value="#{selectedManga.manga.runFromYear}"
-                                 validatorMessage="Das Jahr muss zwischen 1000 und 2200 sein.">
-                        <f:validateLongRange minimum="1000" maximum="2200"/>
+                                 validatorMessage="#{msg['page.add-edit.runFromYear.validationMessage']}">
+                        <f:validateLongRange minimum="1000" maximum="#{selectedManga.currentYear}"/>
                     </h:inputText>
                     <h:message for="runFromYear" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-control-group multiline-control-group">
-                    <h:outputLabel for="runUntilYear" value="Jahr der letzten Ausgabe"/>
+                    <h:outputLabel for="runUntilYear" value="#{msg['manga.runUntilYear']}"/>
                     <h:panelGroup id="runUntilYear">
                         <h:inputText id="runUntilYearInput" value="#{selectedManga.manga.runUntilYear}">
                             <f:attribute name="runFromYear" value="#{runFromYear}"/>
                             <f:validator binding="#{mangaRunUntilYearValidator}"/>
                         </h:inputText>
                         <br/>
-                        0 = ongoing
+                        #{msg['page.add-edit.runUntilYear.ongoing']}
                     </h:panelGroup>
                     <h:message for="runUntilYear" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="volumes" value="Ausgaben"/>
+                    <h:outputLabel for="volumes" value="#{msg['manga.volumes']}"/>
                     <h:inputText id="volumes"
                                  value="#{selectedManga.manga.volumes}"
-                                 validatorMessage="Die Anzahl der Ausgaben muss zwischen 0 und 1000 liegen.">
+                                 validatorMessage="#{msg['page.add-edit.volumes.validationMessage']}">
                         <f:validateLongRange minimum="0" maximum="1000"/>
                     </h:inputText>
                     <h:message for="volumes" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-control-group tablelist">
-                    <h:outputLabel for="genres" value="#{msg['add.genre']}"/>
+                    <h:outputLabel for="genres" value="#{msg['manga.genres']}"/>
                     <h:selectManyCheckbox id="genres"
                                           value="#{selectedManga.selectedGenreIds}">
                         <f:selectItems value="#{selectedManga.listGenres}" var="genre"
@@ -116,17 +118,18 @@
                 </div>
 
                 <div class="pure-control-group">
-                    <h:outputLabel for="description" value="Beschreibung"/>
+                    <h:outputLabel for="description" value="#{msg['manga.description']}"/>
                     <h:inputTextarea id="description" rows="8" cols="60"
                                      value="#{selectedManga.manga.description}"
-                                     validatorMessage="Die Beschreibung darf maximal 1000 Zeichen lang sein.">
+                                     validatorMessage="#{msg['page.add-edit.description.validationMessage']}">
                         <f:validateLength maximum="1000"/>
                     </h:inputTextarea>
                     <h:message for="description" styleClass="validation-message-box"/>
                 </div>
 
                 <div class="pure-controls">
-                    <h:commandButton id="editMangaButton" action="#{selectedManga.doUpdate}" value="Speichern"
+                    <h:commandButton id="editMangaButton" action="#{selectedManga.doUpdate}"
+                                     value="#{msg['page.add-edit.saveButton']}"
                                      styleClass="pure-button"/>
                 </div>
             </h:form>

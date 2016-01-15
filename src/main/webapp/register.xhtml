@@ -17,7 +17,7 @@
             <h:form class="pure-form pure-form-aligned" prependId="false">
                 <fieldset>
                     <div class="pure-control-group">
-                        <h:outputLabel for="accountName" value="Account Name"/>
+                        <h:outputLabel for="accountName" value="#{msg['page.register.accountname']}"/>
                         <h:inputText id="accountName" value="#{registerAccount.accountName}" required="true"
                                      maxlength="#{AccountService.MAX_ACCOUNT_NAME_LENGTH}">
                             <f:validator binding="#{accountNameValidator}"/>
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="pure-control-group">
-                        <h:outputLabel for="displayName" value="Anzeigename"/>
+                        <h:outputLabel for="displayName" value="#{msg['page.register.displayName']}"/>
                         <h:inputText id="displayName" value="#{registerAccount.displayName}" required="true"
                                      maxlength="#{AccountService.MAX_ACCOUNT_DISPLAYNAME_LENGTH}">
                             <f:validateLength maximum="#{AccountService.MAX_ACCOUNT_DISPLAYNAME_LENGTH}"/>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="pure-control-group">
-                        <h:outputLabel for="password" value="Passwort"/>
+                        <h:outputLabel for="password" value="#{msg['page.register.password']}"/>
                         <h:inputSecret id="password" value="#{registerAccount.password}"
                                        required="true" maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">
                             <f:validator binding="#{passwordValidator}"/>
@@ -45,17 +45,19 @@
                     </div>
 
                     <div class="pure-control-group">
-                        <h:outputLabel for="passwordConfirm" value="Passwort wiederholen"/>
+                        <h:outputLabel for="passwordConfirm" value="#{msg['page.register.passwordConfirm']}"/>
                         <h:inputSecret id="passwordConfirm" value="#{registerAccount.passwordConfirm}" required="true"
                                        maxlength="#{AccountService.MAX_PASSWORD_LENGTH}">
                             <o:validateEqual id="passwordsEqual" components="password passwordConfirm"
-                                             message="Passwörter sind nicht gleich" showMessageFor="passwordConfirm"/>
+                                             message="#{msg['page.register.passwordConfirm.validationMessage']}"
+                                             showMessageFor="passwordConfirm"/>
                         </h:inputSecret>
                         <h:message for="passwordConfirm" styleClass="validation-message-box"/>
                     </div>
 
                     <div class="pure-controls">
-                        <h:commandButton action="#{registerAccount.doRegister}" value="Registrieren"
+                        <h:commandButton action="#{registerAccount.doRegister}"
+                                         value="#{msg['page.register.registerButton']}"
                                          id="registerButton" styleClass="pure-button"/>
                     </div>
                 </fieldset>

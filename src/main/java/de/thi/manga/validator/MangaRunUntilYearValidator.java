@@ -1,5 +1,7 @@
 package de.thi.manga.validator;
 
+import de.thi.manga.util.Messages;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -31,18 +33,22 @@ public class MangaRunUntilYearValidator implements Validator {
 
             validateValidYearCombination(untilYear, fromYear);
         } catch (NumberFormatException e) {
-            throw new ValidatorException(new FacesMessage("Ungültiges Jahr angegeben."));
+            throw new ValidatorException(new FacesMessage(
+                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.invalidYear")
+            ));
         }
     }
 
     private void validateValidYearCombination(int untilYear, int fromYear) {
         if (untilYear < fromYear) {
             throw new ValidatorException(new FacesMessage(
-                    "Das Jahr der letzten Ausgabe darf nicht vor dem Jahr der Erstpublikation sein."));
+                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearBeforeFromYear")
+            ));
         }
         if (untilYear > Calendar.getInstance().get(Calendar.YEAR)) {
             throw new ValidatorException(new FacesMessage(
-                    "Das Jahr der letzten Ausgabe darf nicht in der Zukunft liegen."));
+                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearInFuture")
+            ));
         }
     }
 }

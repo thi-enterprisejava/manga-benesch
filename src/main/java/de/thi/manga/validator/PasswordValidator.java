@@ -1,6 +1,7 @@
 package de.thi.manga.validator;
 
 import de.thi.manga.service.AccountService;
+import de.thi.manga.util.Messages;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -23,7 +24,9 @@ public class PasswordValidator implements Validator {
         String password = value.toString();
 
         if (!accountService.isPasswordValid(password)) {
-            throw new ValidatorException(new FacesMessage("Invalid password"));
+            throw new ValidatorException(new FacesMessage(
+                    Messages.getInstance().getString("de.thi.manga.validator.PasswordValidator.invalidPassword")
+            ));
         }
     }
 }

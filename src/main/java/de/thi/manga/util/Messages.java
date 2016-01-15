@@ -11,6 +11,9 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+/**
+ * Wird verwendet um Umlaute aus der messages.properties richtig darstellen zu können.
+ */
 public class Messages extends ResourceBundle {
 
     protected static final String BUNDLE_NAME = "messages";
@@ -19,8 +22,25 @@ public class Messages extends ResourceBundle {
     protected static final Control UTF8_CONTROL = new UTF8Control();
 
     public Messages() {
+        Locale locale = Locale.ENGLISH;
+        try {
+            locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        } catch (NullPointerException e) {
+            //Wenn kein FacesContext vorhanden ist soll es trotzdem mit Englisch funktionieren
+            //z.B. für die Tests
+        }
         setParent(ResourceBundle.getBundle(BUNDLE_NAME,
-                FacesContext.getCurrentInstance().getViewRoot().getLocale(), UTF8_CONTROL));
+                locale, UTF8_CONTROL));
+    }
+
+    /**
+     * Erzeugt ein neues Messages Objekt, das auf das evtl. bereits gecachte Element zurückgreift.
+     * Eine einzige Instanz zu erzeugen ist nicht möglich, da sich die Lokale ändern kann.
+     *
+     * @return eine Messages Instanz der aktuellen Locale
+     */
+    public static Messages getInstance() {
+        return new Messages();
     }
 
     @Override
@@ -38,8 +58,6 @@ public class Messages extends ResourceBundle {
         public ResourceBundle newBundle
                 (String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
                 throws IllegalAccessException, InstantiationException, IOException {
-            // The below code is copied from default Control#newBundle() implementation.
-            // Only the PropertyResourceBundle line is changed to read the file as UTF-8.
             String bundleName = toBundleName(baseName, locale);
             String resourceName = toResourceName(bundleName, BUNDLE_EXTENSION);
             ResourceBundle bundle = null;
