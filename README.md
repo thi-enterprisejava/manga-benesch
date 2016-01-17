@@ -1,6 +1,6 @@
 ## Installationsanleitung
 
-## Voraussetzungen:
+### Voraussetzungen:
 * Docker
 * Maven
 * Git
@@ -44,4 +44,5 @@ mvn package -DskipTests=true docker:build
 docker run -p 8080:8080 -ti --link postgres:postgres enterprisejava2015/mangas:1.0
 ```
 
-###Die Startseite ist erreichbar unter: *localhost:8080/index.xhtml*
+### Die Startseite ist erreichbar unter:
+*localhost:8080/index.xhtml*
