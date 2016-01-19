@@ -2,7 +2,6 @@ package de.thi.manga.web.model;
 
 
 import de.thi.manga.domain.Genre;
-import de.thi.manga.service.AccountService;
 import de.thi.manga.service.GenreService;
 import org.apache.log4j.Logger;
 
@@ -10,8 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.security.NoSuchAlgorithmException;
 
+/**
+ * Wird beim Starten der Applikation ausgeführt. Legt vordefinierte Genres für die Mangas an
+ */
 @Singleton
 @Startup
 public class Init {
@@ -21,13 +22,9 @@ public class Init {
     @EJB
     private transient GenreService genreService;
 
-    @EJB
-    private transient AccountService userService;
-
     @PostConstruct
     public void init() {
         initGenres();
-        initUsers();
     }
 
     public void initGenres() {
@@ -56,15 +53,4 @@ public class Init {
         LOGGER.debug(genreService.findAll().toString());
     }
 
-    public void initUsers() {
-        if (!userService.findAll().isEmpty()) {
-            return;
-        }
-
-        try {
-            userService.createAccount("daniel", "Daniel", "1234", AccountService.DEFAULT_ROLE);
-        } catch (NoSuchAlgorithmException e) {
-            LOGGER.warn("Could not init users", e);
-        }
-    }
 }
