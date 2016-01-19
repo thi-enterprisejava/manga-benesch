@@ -37,8 +37,8 @@ public class GenreServiceIntegrationTest {
         genre1.setName("genre1");
         Genre genre2 = new Genre();
         genre2.setName("genre2");
-        genreService.add(genre1);
-        genreService.add(genre2);
+        genreService.create(genre1);
+        genreService.create(genre2);
 
         List<Genre> genres = genreService.findAll();
 

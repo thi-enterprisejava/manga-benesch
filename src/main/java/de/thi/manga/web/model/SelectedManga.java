@@ -69,7 +69,7 @@ public class SelectedManga implements Serializable {
 
     public String doAdd() throws IOException {
         updateSelectedManga();
-        mangaService.add(manga);
+        mangaService.create(manga);
         return "details.xhtml?faces-redirect=true&manga=" + manga.getId();
     }
 

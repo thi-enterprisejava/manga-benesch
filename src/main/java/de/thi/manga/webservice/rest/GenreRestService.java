@@ -23,7 +23,7 @@ public class GenreRestService {
     @PUT
     @Consumes("application/json")
     public Response add(Genre genre) {
-        genreService.add(genre);
+        genreService.create(genre);
         return Response.accepted().build();
     }
 

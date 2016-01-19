@@ -15,16 +15,30 @@ public class MangaService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void add(Manga manga) {
+    /**
+     * Legt einen neuen Manga in der Datenbank an und macht die Instanz zu einer
+     * Managed Instanz des EntityManagers.
+     *
+     * @param manga der neue Manga
+     */
+    public void create(Manga manga) {
         entityManager.persist(manga);
     }
 
+    /**
+     * Aktualisiert eine existierenden Manga in der Datenbank.
+     * Weitere Änderungen am Objekt müssen über die zurückgegebene Instanz erfolgen.
+     * Zum Anlegen einer neuen Manga {@link #create(Manga)} verwenden.
+     *
+     * @param manga der existierende Manga
+     * @return die Managed Instanz des EntityManagers des upgedateten Manga
+     */
     public Manga update(Manga manga) {
         return entityManager.merge(manga);
     }
 
     /**
-     * Lösche den manga aus allen {@link MangaList}en und anschließend aus der Datenbank
+     * Löscht den Manga aus allen {@link MangaList}en und anschließend aus der Datenbank
      *
      * @param manga der Manga der gelöscht werden soll
      */

@@ -52,8 +52,8 @@ public class MangaServiceIntegrationTest {
         manga1.setTitle("manga1");
         Manga manga2 = new Manga();
         manga2.setTitle("manga2");
-        mangaService.add(manga1);
-        mangaService.add(manga2);
+        mangaService.create(manga1);
+        mangaService.create(manga2);
 
         List<Manga> mangas = mangaService.findAll();
 
@@ -72,9 +72,9 @@ public class MangaServiceIntegrationTest {
         manga2.setTitle("manga2");
         Manga manga3 = new Manga();
         manga3.setTitle("blubb");
-        mangaService.add(manga1);
-        mangaService.add(manga2);
-        mangaService.add(manga3);
+        mangaService.create(manga1);
+        mangaService.create(manga2);
+        mangaService.create(manga3);
 
         List<Manga> mangas = mangaService.findByTitle("manga");
 
@@ -89,7 +89,7 @@ public class MangaServiceIntegrationTest {
     public void testFindById() throws Exception {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
 
         Manga manga = mangaService.findById(manga1.getId());
 
@@ -104,12 +104,12 @@ public class MangaServiceIntegrationTest {
         genre1.setName("genre1");
         Genre genre2 = new Genre();
         genre2.setName("genre2");
-        genreService.add(genre1);
-        genreService.add(genre2);
+        genreService.create(genre1);
+        genreService.create(genre2);
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
         manga1.setGenres(Collections.singletonList(genre2));
-        mangaService.add(manga1);
+        mangaService.create(manga1);
 
         List<Manga> mangas = mangaService.findByGenreId(genre2.getId());
 
@@ -127,16 +127,16 @@ public class MangaServiceIntegrationTest {
         genre1.setName("genre1");
         Genre genre2 = new Genre();
         genre2.setName("genre2");
-        genreService.add(genre1);
-        genreService.add(genre2);
+        genreService.create(genre1);
+        genreService.create(genre2);
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
         manga1.setGenres(Collections.singletonList(genre2));
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         Manga manga2 = new Manga();
         manga2.setTitle("manga2");
         manga2.setGenres(Arrays.asList(genre1, genre2));
-        mangaService.add(manga2);
+        mangaService.create(manga2);
 
         List<Manga> mangas = mangaService.findByTitleAndGenreId("manga", genre2.getId());
 
@@ -154,7 +154,7 @@ public class MangaServiceIntegrationTest {
     public void testUpdateManga() throws Exception {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         Manga persistedManga = mangaService.findById(manga1.getId());
         persistedManga.setTitle("newTitle");
 
@@ -170,7 +170,7 @@ public class MangaServiceIntegrationTest {
     public void testDeleteManga() throws Exception {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         Manga persistedManga = mangaService.findById(manga1.getId());
         assertNotNull(persistedManga);
         MangaList mangaList = new MangaList();

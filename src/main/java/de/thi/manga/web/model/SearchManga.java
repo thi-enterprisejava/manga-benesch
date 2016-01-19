@@ -56,6 +56,9 @@ public class SearchManga implements Serializable {
         return results;
     }
 
+    /**
+     * ViewAction zum initialisieren der Suchergebnisse
+     */
     public void initResults() {
         if (redirected) {
             results = Collections.<Manga>emptyList();

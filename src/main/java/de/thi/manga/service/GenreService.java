@@ -19,7 +19,7 @@ public class GenreService {
         return query.getResultList();
     }
 
-    public void add(Genre genre) {
+    public void create(Genre genre) {
         entityManager.persist(genre);
     }
 }

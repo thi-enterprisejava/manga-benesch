@@ -35,22 +35,22 @@ public class Init {
             return;
         }
 
-        genreService.add(new Genre("Adventure"));
-        genreService.add(new Genre("Action"));
-        genreService.add(new Genre("Cyberpunk"));
-        genreService.add(new Genre("Ecchi"));
-        genreService.add(new Genre("Horror"));
-        genreService.add(new Genre("Magical Girl"));
-        genreService.add(new Genre("Mecha"));
-        genreService.add(new Genre("Mystery"));
-        genreService.add(new Genre("Slice of Life"));
-        genreService.add(new Genre("Sport"));
+        genreService.create(new Genre("Adventure"));
+        genreService.create(new Genre("Action"));
+        genreService.create(new Genre("Cyberpunk"));
+        genreService.create(new Genre("Ecchi"));
+        genreService.create(new Genre("Horror"));
+        genreService.create(new Genre("Magical Girl"));
+        genreService.create(new Genre("Mecha"));
+        genreService.create(new Genre("Mystery"));
+        genreService.create(new Genre("Slice of Life"));
+        genreService.create(new Genre("Sport"));
 
         //Target Group Genres
-        genreService.add(new Genre("Shounen"));
-        genreService.add(new Genre("Seinen"));
-        genreService.add(new Genre("Shoujo"));
-        genreService.add(new Genre("Josei"));
+        genreService.create(new Genre("Shounen"));
+        genreService.create(new Genre("Seinen"));
+        genreService.create(new Genre("Shoujo"));
+        genreService.create(new Genre("Josei"));
 
         LOGGER.debug("Genres initialized:");
         LOGGER.debug(genreService.findAll().toString());

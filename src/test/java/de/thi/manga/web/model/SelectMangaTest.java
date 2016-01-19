@@ -63,7 +63,7 @@ public class SelectMangaTest {
 
         selectedManga.doAdd();
 
-        verify(mangaService, times(1)).add(argumentCaptor.capture());
+        verify(mangaService, times(1)).create(argumentCaptor.capture());
         Manga capturedManga = argumentCaptor.getValue();
         assertEquals("title", capturedManga.getTitle());
         assertEquals(1, capturedManga.getGenres().size());

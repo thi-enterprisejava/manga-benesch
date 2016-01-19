@@ -51,7 +51,7 @@ public class MangaRestService {
     @PUT
     @Consumes("application/json")
     public Response add(Manga manga) {
-        mangaService.add(manga);
+        mangaService.create(manga);
         return Response.accepted().build();
     }
 

@@ -45,10 +45,10 @@ public class MangaListServiceIntegrationTest {
     public void testFindMangaList() throws Exception {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         Manga manga2 = new Manga();
         manga2.setTitle("manga2");
-        mangaService.add(manga2);
+        mangaService.create(manga2);
         MangaList mangaList = new MangaList();
         mangaList.setAccountId(123L);
         mangaList.setMangas(Arrays.asList(manga1, manga2));
@@ -74,7 +74,7 @@ public class MangaListServiceIntegrationTest {
 
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         List<Manga> persistedMangasInList = persistedMangaList.getMangas();
         persistedMangasInList.clear();
         persistedMangasInList.add(manga1);
@@ -91,7 +91,7 @@ public class MangaListServiceIntegrationTest {
     public void testUpdateRemoveMangaToMangaList() throws Exception {
         Manga manga1 = new Manga();
         manga1.setTitle("manga1");
-        mangaService.add(manga1);
+        mangaService.create(manga1);
         MangaList mangaList = new MangaList();
         mangaList.setAccountId(123L);
         mangaList.setMangas(new ArrayList<>(Arrays.asList(manga1)));

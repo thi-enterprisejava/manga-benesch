@@ -24,6 +24,9 @@ public class AccountService {
     public static final int MIN_PASSWORD_LENGTH = 4;
     public static final int MAX_PASSWORD_LENGTH = 50;
 
+    /**
+     * Die default Rolle für neue Benutzer (siehe web.xml)
+     */
     public static final String DEFAULT_ROLE = "user";
 
     @PersistenceContext
@@ -59,6 +62,14 @@ public class AccountService {
         return !query.getResultList().isEmpty();
     }
 
+    /**
+     * Um Fehler bei der Groß- und Kleinschreibung im Accountnamen zu vermeiden, wird der
+     * Accountname nur in Lowercase gespeichert und muss zum Einloggen wieder genau so
+     * transformiert werden.
+     *
+     * @param name der Accountname
+     * @return der transformierte Accountname, wie er in die Datenbank geschrieben wird
+     */
     public String transformAccountName(String name) {
         return name.toLowerCase(Locale.ENGLISH);
     }
@@ -75,7 +86,7 @@ public class AccountService {
     }
 
     /**
-     * Encodiert das Passwort entsprechend für die security Domain (siehe standalone.xml)
+     * Encodiert das Passwort entsprechend für die security Domain
      *
      * @param password das Passwort im Klartext
      * @return das sha256 und base64 codierte Passwort

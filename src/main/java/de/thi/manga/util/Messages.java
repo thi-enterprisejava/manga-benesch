@@ -34,7 +34,7 @@ public class Messages extends ResourceBundle {
     }
 
     /**
-     * Erzeugt ein neues Messages Objekt, das auf das evtl. bereits gecachte Element zurückgreift.
+     * Erzeugt ein neues Messages Objekt, das auf evtl. bereits gecachte Element zurückgreift.
      * Eine einzige Instanz zu erzeugen ist nicht möglich, da sich die Lokale ändern kann.
      *
      * @return eine Messages Instanz der aktuellen Locale
@@ -53,6 +53,11 @@ public class Messages extends ResourceBundle {
         return parent.getKeys();
     }
 
+    /**
+     * Control, das die Properties Datei in UTF-8 lädt.
+     * Kopiert aus Control#newBundle().
+     * In der Zeile mit PropertyResourceBundle wurde das Charset geändert.
+     */
     protected static class UTF8Control extends Control {
         @Override
         public ResourceBundle newBundle
