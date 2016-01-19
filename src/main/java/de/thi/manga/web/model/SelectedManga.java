@@ -124,7 +124,7 @@ public class SelectedManga implements Serializable {
     private List<Genre> convertToGenreList(List<String> genreIds) {
         List<Genre> genresResult = new ArrayList<>(genreIds.size());
         for (String genreId : genreIds) {
-            long id = Long.valueOf(genreId);
+            long id = Long.parseLong(genreId);
             for (Genre next : this.getListGenres()) {
                 if (id == next.getId()) {
                     genresResult.add(next);
