@@ -21,7 +21,7 @@ public abstract class AbstractUITest {
                 .addAsWebResource(new File("src/main/webapp/login-template.xhtml"))
                 .addAsWebResource(new File("src/main/webapp/mangalist.xhtml"))
                 .addAsWebResource(new File("src/main/webapp/notfound.xhtml"))
-                .addAsWebResource(new File("src/main/webapp/register.xhtml")) //remove
+                .addAsWebResource(new File("src/main/webapp/register.xhtml"))
                 .addAsWebResource(new File("src/main/webapp/search.xhtml"))
                 .addAsWebResource(new File("src/main/webapp/template.xhtml"))
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/faces-config.xml"))

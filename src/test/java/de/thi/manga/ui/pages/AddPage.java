@@ -46,9 +46,7 @@ public class AddPage {
         authorElement.sendKeys(author);
         publisherElement.sendKeys(publisher);
         runFromYearElement.sendKeys(String.valueOf(runFromYear));
-        System.out.println(runFromYearElement.getText());
         runUntilYearElement.sendKeys(String.valueOf(runUntilYear));
-        System.out.println(runUntilYearElement.getText());
         volumesElement.sendKeys(String.valueOf(volumes));
         for (String genre : genres) {
             for (WebElement webElement : genresElement) {

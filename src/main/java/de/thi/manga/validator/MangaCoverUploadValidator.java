@@ -34,13 +34,13 @@ public class MangaCoverUploadValidator implements Validator {
 
         if (file.getSize() > MAX_FILESIZE) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.MangaCoverUploadValidator.fileTooLarge")
+                    new Messages().getString("de.thi.manga.validator.MangaCoverUploadValidator.fileTooLarge")
             ));
         }
 
         if (!file.getContentType().matches(CONTENT_TYPE_REGEX)) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.MangaCoverUploadValidator.invalidContentType")
+                    new Messages().getString("de.thi.manga.validator.MangaCoverUploadValidator.invalidContentType")
             ));
         }
     }

@@ -16,7 +16,7 @@
             <div class="content">
                 <h1>#{msg['page.mangalist.header']}</h1>
 
-                <h:outputText value="Blubb" rendered="#{empty mangaListBean.mangas}"/>
+                <h:outputText value="#{msg['page.mangalist.empty']}" rendered="#{empty mangaListBean.mangas}"/>
                 <h:panelGroup rendered="#{not empty mangaListBean.mangas}">
                     <table class="pure-table pure-table-striped">
                         <thead>
@@ -58,11 +58,6 @@
                         </ui:repeat>
                         </tbody>
                     </table>
-                </h:panelGroup>
-
-                <h:panelGroup rendered="#{mangaListBean.mangas eq null}">
-                    <br/>
-                    #{msg['page.mangalist.empty']}
                 </h:panelGroup>
 
             </div>

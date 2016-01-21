@@ -49,7 +49,7 @@
                         <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
                                         styleClass="pure-img edit-cover-image"
                                         value="#{imageStreamer.getCoverByMangaId(selectedManga.mangaId)}"
-                                        lastModified="#{startup.time}"/>
+                                        lastModified="#{now}"/>
                     </h:panelGroup>
                     <h:message id="imageFileMessage" for="imageFile" styleClass="validation-message-box"/>
                 </div>

@@ -25,7 +25,7 @@ public class PasswordValidator implements Validator {
 
         if (!accountService.isPasswordValid(password)) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.PasswordValidator.invalidPassword")
+                    new Messages().getString("de.thi.manga.validator.PasswordValidator.invalidPassword")
             ));
         }
     }

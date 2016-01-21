@@ -82,7 +82,9 @@
                             <div class="pure-control-group">
                                 <h:outputLabel for="runUntilYear" value="#{msg['manga.runUntilYear']}"/>
                                 <h:outputText id="runUntilYear"
-                                              value="#{selectedManga.manga.runUntilYear}">
+                                              value="#{selectedManga.manga.runUntilYear==0?
+                                              msg['manga.ongoing']:
+                                              selectedManga.manga.runUntilYear}">
                                 </h:outputText>
                             </div>
 
@@ -118,7 +120,7 @@
                         <o:graphicImage rendered="#{not empty selectedManga.manga.cover}"
                                         id="cover" styleClass="pure-img"
                                         value="#{imageStreamer.getCoverByMangaId(selectedManga.mangaId)}"
-                                        lastModified="#{startup.time}"/>
+                                        lastModified="#{now}"/>
                     </div>
                 </div>
             </div>

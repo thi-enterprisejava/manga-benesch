@@ -56,10 +56,8 @@ public class MangaUITest extends AbstractUITest {
 
         browser.get(deploymentUrl.toExternalForm() + "edit.xhtml?manga=" + mangaId);
 
-        System.out.println(browser.getPageSource());
         editPage.doEditManga("Ckira", "autor2", "publisher2",
                 2002, 2003, 20, Collections.singletonList("Horror"), "description2");
-        System.out.println(browser.getPageSource());
 
         detailsPage.assertTitleEquals("Ckira");
         detailsPage.assertAuthorEquals("autor2");

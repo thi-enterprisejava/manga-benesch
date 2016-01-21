@@ -21,6 +21,12 @@ public class Messages extends ResourceBundle {
     protected static final String CHARSET = "UTF-8";
     protected static final Control UTF8_CONTROL = new UTF8Control();
 
+    /**
+     * Erzeugt ein neues Messages Objekt, abhängig von der aktuellen Locale im FacesContext.
+     * Für jeden Request sollte ein neuen Messages Objekt verwendet werden, da sich die Sprache
+     * des Requests ändern kann.
+     * Die Messages Instanz greift auf evtl. bereits gecachte Properties zurück.
+     */
     public Messages() {
         Locale locale = Locale.ENGLISH;
         try {
@@ -31,16 +37,6 @@ public class Messages extends ResourceBundle {
         }
         setParent(ResourceBundle.getBundle(BUNDLE_NAME,
                 locale, UTF8_CONTROL));
-    }
-
-    /**
-     * Erzeugt ein neues Messages Objekt, das auf evtl. bereits gecachte Element zurückgreift.
-     * Eine einzige Instanz zu erzeugen ist nicht möglich, da sich die Lokale ändern kann.
-     *
-     * @return eine Messages Instanz der aktuellen Locale
-     */
-    public static Messages getInstance() {
-        return new Messages();
     }
 
     @Override

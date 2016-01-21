@@ -41,7 +41,9 @@ public class MangaListBean implements Serializable {
     }
 
     public List<Manga> getMangas() {
-        return mangaList.getMangas();
+        List<Manga> mangas = mangaList.getMangas();
+        mangas.sort((m1, m2) -> m1.getTitle().compareTo(m2.getTitle()));
+        return mangas;
     }
 
     public void addManga(Manga manga) {

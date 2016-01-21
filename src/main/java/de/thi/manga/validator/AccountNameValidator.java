@@ -25,13 +25,13 @@ public class AccountNameValidator implements Validator {
 
         if (!accountService.isAccountNameValid(accountName)) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.AccountNameValidator.invalidAccountName")
+                    new Messages().getString("de.thi.manga.validator.AccountNameValidator.invalidAccountName")
             ));
         }
 
         if (accountService.isAccountExists(accountService.transformAccountName(accountName))) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.AccountNameValidator.accountExists")
+                    new Messages().getString("de.thi.manga.validator.AccountNameValidator.accountExists")
             ));
         }
     }

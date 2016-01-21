@@ -3,7 +3,6 @@ package de.thi.manga.validator;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
 
@@ -12,7 +11,6 @@ import static org.mockito.Mockito.when;
 public class MangaCoverUploadValidatorTest {
 
     MangaCoverUploadValidator mangaCoverUploadValidator = new MangaCoverUploadValidator();
-    private FacesContext facesContext;
 
     @Test
     public void testNoCover() {

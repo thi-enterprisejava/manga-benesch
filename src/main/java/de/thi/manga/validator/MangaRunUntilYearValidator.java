@@ -34,7 +34,7 @@ public class MangaRunUntilYearValidator implements Validator {
             validateValidYearCombination(untilYear, fromYear);
         } catch (NumberFormatException e) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.invalidYear")
+                    new Messages().getString("de.thi.manga.validator.MangaRunUntilYearValidator.invalidYear")
             ));
         }
     }
@@ -42,12 +42,12 @@ public class MangaRunUntilYearValidator implements Validator {
     private void validateValidYearCombination(int untilYear, int fromYear) {
         if (untilYear < fromYear) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearBeforeFromYear")
+                    new Messages().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearBeforeFromYear")
             ));
         }
         if (untilYear > Calendar.getInstance().get(Calendar.YEAR)) {
             throw new ValidatorException(new FacesMessage(
-                    Messages.getInstance().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearInFuture")
+                    new Messages().getString("de.thi.manga.validator.MangaRunUntilYearValidator.untilYearInFuture")
             ));
         }
     }
