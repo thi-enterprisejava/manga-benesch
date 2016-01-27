@@ -10,6 +10,8 @@ ADD commands.cli /tmp/commands.cli
 RUN cd $HOME \
     && curl -O https://jdbc.postgresql.org/download/postgresql-$POSTGRES_VERSION.jdbc4.jar \
     && mv $HOME/postgresql-$POSTGRES_VERSION.jdbc4.jar /tmp/ \
+    && keytool -genkey -alias mycert -keyalg RSA -sigalg MD5withRSA -keystore my.jks -storepass secret -keypass secret -validity 9999 -dname "CN=Mangas , OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" \
+    && mv my.jks $JBOSS_HOME/standalone/configuration \
     && echo postgres.version=${POSTGRES_VERSION} > /tmp/env.properties \
     && $JBOSS_HOME/bin/jboss-cli.sh --properties=/tmp/env.properties --file=/tmp/commands.cli \
     && rm -rf $JBOSS_HOME/standalone/configuration/standalone_xml_history \

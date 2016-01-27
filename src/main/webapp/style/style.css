@@ -1,5 +1,5 @@
-@import url(http://yui.yahooapis.com/pure/0.6.0/pure-min.css);
-@import url(http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css);
+@import "pure-min.css";
+@import "grids-responsive-min.css";
 
 html, body {
     height: 100%;

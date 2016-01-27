@@ -14,4 +14,10 @@ data-source add --jndi-name=java:/MangaDS --name=MangaDS --connection-url=jdbc:p
 /subsystem=security/security-domain=mangaSecurityDomain/:add(cache-type=default)
 /subsystem=security/security-domain=mangaSecurityDomain/authentication=classic:add(login-modules=[{"code"=>"Database", "flag"=>"required" , module-options=>["dsJndiName"=>"java:/MangaDS", "principalsQuery"=>"SELECT password FROM Account WHERE name=?", "rolesQuery" => "SELECT role, 'Roles' FROM Account WHERE name=?", "hashAlgorithm" => "SHA-256", "hashEncoding" => "base64"]}])
 
+# Configure ssl
+/core-service=management/security-realm=WebSocketRealm:add()
+/core-service=management/security-realm=WebSocketRealm/server-identity=ssl:add(keystore-path=my.jks, keystore-relative-to=jboss.server.config.dir, keystore-password=secret)
+/subsystem=undertow/server=default-server/https-listener=https:add(socket-binding=https, security-realm=WebSocketRealm)
+reload
+
 stop-embedded-server
